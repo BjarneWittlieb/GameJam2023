@@ -24,6 +24,9 @@ public class EnemyMovement : MonoBehaviour
 
         var velocity = new Vector2(xDif, yDif).normalized;
 
+        // Stauch it baby, isometric shit
+        velocity = new Vector2(velocity.x, velocity.y / 2);
+
         enemyRigid.velocity = velocity * speedMod;
     }
 }
