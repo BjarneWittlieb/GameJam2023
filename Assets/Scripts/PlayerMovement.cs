@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
 
         Vector2 velocity = new Vector2(horizontalInput, verticalInput).normalized * Math.Max(Math.Abs(horizontalInput), Math.Abs(verticalInput));
 
+        // Stauch it baby, isometric shit
+        velocity = new Vector2(velocity.x, velocity.y / 2);
 
         playerRigit.velocity = speedMod * velocity;
     }       
