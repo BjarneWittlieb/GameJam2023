@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -12,14 +10,12 @@ public class PlayerMovement : MonoBehaviour
     // der zugewiesene Wert ist ein Default
     public float speedMod = 1.0f;
 
-    // Start is called before the first frame update
     void Start()
     {
         playerRigid = GetComponent<Rigidbody2D>();
         initialRotation = transform.rotation;
     }
 
-    // Update is called once per frame
     void Update()
     {
         var horizontalInput = Input.GetAxis("Horizontal");
