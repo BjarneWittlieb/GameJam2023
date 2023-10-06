@@ -20,9 +20,9 @@ public class EnemyMovement : MonoBehaviour
     void Update()
     {
         var xDif = playerRigid.position.x - enemyRigid.position.x;
-        var yDif =playerRigid.position.y - enemyRigid.position.y;
+        var yDif = playerRigid.position.y - enemyRigid.position.y;
 
-        Vector2 velocity = new Vector2(xDif, yDif).normalized;
+        var velocity = new Vector2(xDif, yDif).normalized;
 
         enemyRigid.velocity = velocity * speedMod;
     }
