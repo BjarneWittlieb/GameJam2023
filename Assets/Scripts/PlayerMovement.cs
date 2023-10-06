@@ -1,29 +1,39 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
+// ReSharper disable All
 
 public class PlayerMovement : MonoBehaviour
 {
-    private Rigidbody2D playerRigit;
+    private Rigidbody2D playerRigid;
+    private Quaternion initialRotation;
 
+    // ReSharper disable once CommentTypo
+    // public Variablen sieht man im Inspector-Fenster von Unity und kann sie dort modifizieren
+    // der zugewiesene Wert ist ein Default
     public float speedMod = 1.0f;
 
-    // Start is called before the first frame update
     void Start()
     {
-        playerRigit = GetComponent<Rigidbody2D>();
+        playerRigid = GetComponent<Rigidbody2D>();
+        initialRotation = transform.rotation;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        var horizontalInput = Input.GetAxis("Horizontal");
-        var verticalInput = Input.GetAxis("Vertical");
+        playerRigid.velocity = speedMod * computeVelocity();
+    }
 
-        Vector2 velocity = new Vector2(horizontalInput, verticalInput).normalized * Math.Max(Math.Abs(horizontalInput), Math.Abs(verticalInput));
+    Vector2 computeVelocity()
+    {
+        var x = Input.GetAxis("Horizontal");
+        var y = Input.GetAxis("Vertical");
+        var scaleFactor = Math.Max(Math.Abs(x), Math.Abs(y));
+        return new Vector2(x * scaleFactor, y * scaleFactor / 2);
+    }
 
-
-        playerRigit.velocity = speedMod * velocity;
-    }       
+    void LateUpdate()
+    {
+        transform.rotation = initialRotation;
+    }
 }
