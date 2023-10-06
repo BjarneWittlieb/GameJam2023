@@ -5,14 +5,18 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private Rigidbody2D playerRigit;
+    private Rigidbody2D playerRigid;
+    private Quaternion initialRotation;
 
+    // public Variablen sieht man im Inspector-Fenster von Unity und kann sie dort modifizieren
+    // der zugewiesene Wert ist ein Default
     public float speedMod = 1.0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerRigit = GetComponent<Rigidbody2D>();
+        playerRigid = GetComponent<Rigidbody2D>();
+        initialRotation = transform.rotation;
     }
 
     // Update is called once per frame
@@ -24,6 +28,11 @@ public class PlayerMovement : MonoBehaviour
         Vector2 velocity = new Vector2(horizontalInput, verticalInput).normalized * Math.Max(Math.Abs(horizontalInput), Math.Abs(verticalInput));
 
 
-        playerRigit.velocity = speedMod * velocity;
-    }       
+        playerRigid.velocity = speedMod * velocity;
+    }
+
+    void LateUpdate()
+    {
+        transform.rotation = initialRotation;
+    }
 }
