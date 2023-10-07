@@ -1,15 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class HealthSymbol : MonoBehaviour
 {
-    private Image[] imageElements;
-    public void Start()
-    {
-        imageElements = this.transform.GetComponentsInChildren<Image>();
-    }
+    public UnityEngine.UI.Image[] imageElements;
 
     public void changeOpacity(float opacity)
     {

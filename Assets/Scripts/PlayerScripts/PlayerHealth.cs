@@ -11,9 +11,6 @@ namespace PlayerScripts
         public int maxHealth = 4;
         private int health;
 
-        public delegate void HitEvent(int damage);
-        public static event HitEvent OnHit;
-
         public delegate void HealthChagne(int health, int totalHealth);
         public static event HealthChagne OnHealthChange;
 
@@ -24,16 +21,21 @@ namespace PlayerScripts
         void Start()
         {
             health = maxHealth;
-            OnHit += ProcessHit;
+            if (OnHealthChange != null) OnHealthChange(health, maxHealth);
         }
+
+    
 
         // Update is called once per frame
         void Update()
         {
-
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                ProcessHit(1);
+            }
         }
 
-        private void ProcessHit(int damage)
+        public void ProcessHit(int damage)
         {
             health -= damage;
             
@@ -43,7 +45,6 @@ namespace PlayerScripts
             {
                 return;
             }
-            
 
             if (OnDeath != null) OnDeath();
         }
