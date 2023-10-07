@@ -12,6 +12,8 @@ namespace RoomGeneration
         private List<RoomObject> objects;
         private Transform levelRoot;
 
+        public RoomReward RoomReward { get; private set; }
+
         public Room(Transform levelRoot)
         {
             this.levelRoot = levelRoot;
@@ -23,11 +25,12 @@ namespace RoomGeneration
             objects.Add(roomObject);
         }
 
-        public virtual void PopulateAgents() { 
-            foreach (RoomObject roomObject in objects.Where(ro => ro.Type == RoomObjectType.Agent)) 
+        public virtual void PopulateEnemies() { 
+            foreach (RoomObject roomObject in objects.Where(ro => ro.Type == RoomObjectType.Enemy)) 
             {
                 roomObject.AddToScene(levelRoot);
             }
+            ProgressionTracking.Instance.ResetEnemyCountTo(objects.Count());
         }
 
         public virtual void PopulateObstacles()

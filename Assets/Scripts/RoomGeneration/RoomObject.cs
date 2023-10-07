@@ -62,14 +62,14 @@ namespace RoomGeneration
 
         private GameObject addedObject;
 
-        public RoomObject(string path, UnityEngine.Vector2 position, int difficulty = 0, RoomObjectType type = RoomObjectType.Agent)
+        public RoomObject(string path, UnityEngine.Vector2 position, int difficulty = 0, RoomObjectType type = RoomObjectType.Enemy)
         {
             this.PrefabPath = path;
             this.positions = new UnityEngine.Vector2[] { position };
             DifficultyScore = difficulty;
         }
 
-        public RoomObject(string path, UnityEngine.Vector2[] positions, int difficulty = 0, RoomObjectType type = RoomObjectType.Agent)
+        public RoomObject(string path, UnityEngine.Vector2[] positions, int difficulty = 0, RoomObjectType type = RoomObjectType.Enemy)
         {
             this.PrefabPath = path;
             this.positions = positions;
