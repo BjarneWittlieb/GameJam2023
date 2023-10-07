@@ -5,16 +5,25 @@ namespace PlayerScripts
     public class RangedAttack : MonoBehaviour
     {
         [SerializeField] private GameObject projectile;
-        [SerializeField] private Transform projectileSpawnPoint;
+        [SerializeField] private Transform  projectileSpawnPoint;
+        [SerializeField] private float      cooldown;
+        private                  float      cooldownTimer;
         
         private void Update()
-        {
-            if(Input.GetKeyDown(KeyCode.Mouse0))
+        { 
+            cooldownTimer -= Time.deltaTime;
+            
+            if(Input.GetKey(KeyCode.Mouse0))
                 FireProjectile();
         }
 
         private void FireProjectile()
-        {   
+        {
+            if (cooldownTimer > 0)
+                return;
+
+            cooldownTimer = cooldown;
+            
             var mouseScreenPosition = Input.mousePosition;
             var mouseWorldPosition  = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
 
@@ -22,7 +31,7 @@ namespace PlayerScripts
             var   angle            = Mathf.Atan2(directionToMouse.y, directionToMouse.x) * Mathf.Rad2Deg;
 
             Transform projectileSpawnTransform;
-            (projectileSpawnTransform = projectileSpawnPoint.transform).rotation = Quaternion.Euler(0f, 0f, angle);
+            (projectileSpawnTransform = projectileSpawnPoint.transform).rotation = Quaternion.Euler(0f, 0f,  angle);
             
             Instantiate(projectile, projectileSpawnPoint.position, projectileSpawnTransform.rotation);
         }

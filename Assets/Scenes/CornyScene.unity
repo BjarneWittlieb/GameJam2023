@@ -227,6 +227,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2605528771449522188, guid: e0cc03a8902d8f844b54824323e6abff, type: 3}
+      propertyPath: cooldown
+      value: 0.33
+      objectReference: {fileID: 0}
     - target: {fileID: 9200488520428023920, guid: e0cc03a8902d8f844b54824323e6abff, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
