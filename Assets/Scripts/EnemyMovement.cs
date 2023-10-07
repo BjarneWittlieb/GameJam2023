@@ -32,7 +32,7 @@ public class EnemyMovement : MonoBehaviour
             _agent.enabled = true;
             _agent.SetDestination(player.transform.position);
             var desiredVelocity = _agent.desiredVelocity;
-            _agent.velocity = new Vector3(desiredVelocity.x, desiredVelocity.y / 2, desiredVelocity.z);
+            _agent.velocity = new Vector3(desiredVelocity.x, desiredVelocity.y / 2, desiredVelocity.z); 
         }
         else
         {
