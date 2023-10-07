@@ -1,6 +1,6 @@
 using PlayerScripts;
-using System;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Enemy
 {
@@ -8,6 +8,12 @@ namespace Enemy
     {
         public int health = 1;
         public int damage = 1;
+
+        /// <summary>
+        ///     <para>The lower the bigger the recoil of the player. 15 Seems nice</para>
+        /// </summary>
+        public int recoilDivisor = 15;
+
         private readonly string playerName = "Player";
         protected float AttackDistance;
         protected float MovementSpeed;
@@ -25,6 +31,8 @@ namespace Enemy
         private void ProcessHit(Collision2D other)
         {
             if (other.gameObject.name != playerName) return;
+            var enemyVelocity = gameObject.GetComponent<NavMeshAgent>().velocity.normalized / recoilDivisor;
+            other.rigidbody.AddForce(enemyVelocity, ForceMode2D.Force);
             Debug.Log($"Player was hit with {damage} Damage");
             other.gameObject.GetComponent<PlayerHealth>().ProcessHit(damage);
         }
