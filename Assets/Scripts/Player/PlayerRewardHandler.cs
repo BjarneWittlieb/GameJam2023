@@ -9,29 +9,36 @@ namespace Assets.Scripts.Player
 {
     public class PlayerRewardHandler: MonoBehaviour
     {
-        public void AddDamageReward()
+        PlayerMovement playerMovement;
+
+        public void Start()
         {
-
+            playerMovement = GetComponent<PlayerMovement>();
         }
 
-        public void AddHealthReward() { 
+        public void AddDamageReward(int strength)
+        {
+            
+        }
+
+        public void AddHealthReward(int strength) { 
         
         }
 
-        public void AddSpeedReward() { 
+        public void AddSpeedReward(int strength) { 
         
         }
 
-        public void AddLifeRegReward() { 
-        
+        public void AddLifeRegReward(int strength) { 
+            
         }
 
-        public void AddBloodThirstyReward() { 
-        
+        public void AddBloodThirstyReward(int strength) { 
+            // Idea, Killing enemies in succession yields higher damage
         }
 
-        public void AddInnocenceRewanrd() { 
-        
+        public void AddInnocenceRewanrd(int strength) { 
+            // Idea, Not Hurting enemies will give them higher and higher procs
         }
 
 

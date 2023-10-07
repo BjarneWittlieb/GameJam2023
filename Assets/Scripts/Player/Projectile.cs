@@ -13,9 +13,11 @@ namespace Player
 
         [Header("Info")] [SerializeField] private float bulletSpeed;
 
-        [SerializeField] public int damage;
+        [SerializeField] public float damageMultiply;
         [SerializeField] private float lifeTime;
         private float isoFactor;
+
+        private int baseDamage;
 
         private void Awake()
         {
@@ -40,7 +42,8 @@ namespace Player
         {
             if (other.gameObject.CompareTag("Enemy"))
             {
-                other.gameObject.GetComponent<Enemy.Enemy>().TakeDamage(damage);
+                other.gameObject.GetComponent<Enemy.Enemy>().TakeDamage((int) (baseDamage * damageMultiply));
+
                 if (hitEffect)
                     Instantiate(hitEffect, other.contacts[0].point, quaternion.identity);
 
@@ -49,6 +52,11 @@ namespace Player
             }
 
             Destroy(gameObject);
+        }
+
+        public void SetBaseDamage(int baseDamage)
+        {
+            this.baseDamage = baseDamage;
         }
     }
 }
