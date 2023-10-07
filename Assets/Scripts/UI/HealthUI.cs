@@ -48,7 +48,8 @@ public class HealthUI : MonoBehaviour
         for (int i = 1; i < maxHealth / 2; i++)
         {
             var newHealthSymbol = Instantiate(healthSymbolTemplate, this.transform);
-            newHealthSymbol.transform.position += new Vector3(OFFSET * i, 0, 0);
+            newHealthSymbol.GetComponent<RectTransform>().position += new Vector3(OFFSET * i, 0, 0);
+            //newHealthSymbol.transform.position += new Vector3(OFFSET * i, 0, 0);
             newHealthSymbol.SetHealth(2);
             healthSymbols.Add(newHealthSymbol);
         }
