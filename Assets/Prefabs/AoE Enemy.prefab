@@ -197,7 +197,7 @@ Rigidbody2D:
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!195 &2617448593737384384
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -236,8 +236,9 @@ MonoBehaviour:
   damage: 1
   stunTimer: 0
   stunDuration: 0.2
-  deathEffect: {fileID: 0}
+  deathEffect: {fileID: 6631738932900923114, guid: e72b70b43cbc58d4e89504ce4edacbdc, type: 3}
   recoilDivisor: 15
   fireRate: 900
   rangedDamage: 1
+  randomAimFactor: 10
   projectile: {fileID: 6679318488970040256, guid: 7bf029d0208ae447da6fa97669c6e3c9, type: 3}
