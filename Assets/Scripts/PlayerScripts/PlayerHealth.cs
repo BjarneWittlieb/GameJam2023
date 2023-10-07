@@ -7,7 +7,7 @@ namespace PlayerScripts
     {
         public delegate void DeathEvent();
 
-        public delegate void HealthChagne(int health, int totalHealth);
+        public delegate void HealthChange(int health, int totalHealth);
 
         public int maxHealth = 4;
         private DateTime _lastHit;
@@ -27,7 +27,7 @@ namespace PlayerScripts
             if (Input.GetKeyDown(KeyCode.K)) ProcessHit(1);
         }
 
-        public static event HealthChagne OnHealthChange;
+        public static event HealthChange OnHealthChange;
         public static event DeathEvent OnDeath;
 
         public void ProcessHit(int damage)

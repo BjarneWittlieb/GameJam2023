@@ -45,5 +45,13 @@ namespace Enemy
         private void DoDamage(int damage)
         {
         }
+
+        public void TakeDamage(int amount)
+        {
+            health -= damage;
+            
+            if (health <= 0)
+                Destroy(gameObject);
+        }
     }
 }
