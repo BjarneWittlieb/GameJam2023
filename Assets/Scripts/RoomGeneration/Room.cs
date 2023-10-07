@@ -23,11 +23,26 @@ namespace RoomGeneration
             objects.Add(roomObject);
         }
 
-        public virtual void AddToScene()
-        {
-            foreach(RoomObject roomObject in objects)
+        public virtual void PopulateAgents() { 
+            foreach (RoomObject roomObject in objects.Where(ro => ro.Type == RoomObjectType.Agent)) 
             {
                 roomObject.AddToScene(levelRoot);
+            }
+        }
+
+        public virtual void PopulateObstacles()
+        {
+            foreach(RoomObject roomObject in objects.Where(ro => ro.Type == RoomObjectType.Obstacle))
+            {
+                roomObject.AddToScene(levelRoot);
+            }
+        }
+
+        public void DestroyRoom()
+        {
+            foreach (var roomObject in objects)
+            {
+                roomObject.RemoveFromScene();
             }
         }
     }

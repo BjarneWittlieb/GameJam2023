@@ -5,14 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEditor.Profiling.Memory.Experimental;
 
-namespace Util.RoomGeneration
+namespace RoomGeneration
 {
-    public class RoomObjectType
+    public enum RoomObjectType
     {
-        public string Name { get; set; }
-        public int MinimumAmount { get; set; }
-        public int MaximumAmount { get; set; }
-
-
+        Agent,
+        Obstacle
     }
 }
