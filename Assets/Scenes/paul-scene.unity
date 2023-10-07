@@ -227,6 +227,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3555840472170330407, guid: e0cc03a8902d8f844b54824323e6abff, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.921
+      objectReference: {fileID: 0}
+    - target: {fileID: 3555840472170330407, guid: e0cc03a8902d8f844b54824323e6abff, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.193
+      objectReference: {fileID: 0}
     - target: {fileID: 9200488520428023920, guid: e0cc03a8902d8f844b54824323e6abff, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -270,7 +278,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1519444264200571714, guid: e0cc03a8902d8f844b54824323e6abff, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1644918409}
   m_SourcePrefab: {fileID: 100100000, guid: e0cc03a8902d8f844b54824323e6abff, type: 3}
 --- !u!1 &1466369018
 GameObject:
@@ -335,6 +346,7 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: -0.25, y: 0.43359375}
+      - {x: -0.4310499, y: 0.11958525}
       - {x: -0.5, y: 0}
       - {x: -0.25, y: -0.43359375}
       - {x: 0.25, y: -0.43359375}
@@ -408,6 +420,46 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1644918404 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1519444264200571714, guid: e0cc03a8902d8f844b54824323e6abff, type: 3}
+  m_PrefabInstance: {fileID: 1050228862}
+  m_PrefabAsset: {fileID: 0}
+--- !u!70 &1644918409
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1644918404}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.5, y: 1}
+  m_Direction: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
