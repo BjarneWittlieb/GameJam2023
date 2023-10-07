@@ -3,6 +3,7 @@ using PlayerScripts;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Player;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -18,7 +19,7 @@ public class HealthUI : MonoBehaviour
     {
         healthSymbolTemplate = GetComponentInChildren<HealthSymbol>();
 
-        PlayerHealth.OnHealthChange += UpdateHealthUI;
+        Health.OnHealthChange += UpdateHealthUI;
     }
 
     private void UpdateHealthUI(int health, int maxHealth)

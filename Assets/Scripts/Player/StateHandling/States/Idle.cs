@@ -2,7 +2,7 @@
 {
     public class Idle : Alive
     {
-        public Idle(Player player, PlayerStateMachine playerStateMachine) : base(player, playerStateMachine) { }
+        public Idle(Player.Player player, PlayerStateMachine playerStateMachine) : base(player, playerStateMachine) { }
 
         public override State Key      => State.Idle;
         public override string   AnimName => "Idle";

@@ -1,11 +1,19 @@
-using PlayerScripts;
-using Unity.Mathematics;
+using Player;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 namespace Enemy
 {
-    public class EnemyProjectile : Projectile
+    public class Projectile : Player.Projectile
     {
+        public PostProcessVolume fxVolume;
+        private Vignette vignette;
+
+        private void Start()
+        {
+            fxVolume.profile.TryGetSettings(out vignette);
+        }
+
         private void OnCollisionEnter2D(Collision2D other)
         {
             switch (other.gameObject.name)
@@ -13,13 +21,11 @@ namespace Enemy
                 case "Ranged Enemy":
                     return;
                 case "Player":
-                    other.gameObject.GetComponent<PlayerHealth>().ProcessHit(damage);
+                    other.gameObject.GetComponent<Health>().ProcessHit(damage);
                     break;
             }
 
-
-            if (hitEffect)
-                Instantiate(hitEffect, other.contacts[0].point, quaternion.identity);
+            vignette.active = true;
 
             if (hitSound)
                 AudioSource.PlayClipAtPoint(hitSound, transform.position);

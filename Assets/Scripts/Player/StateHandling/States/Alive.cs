@@ -2,7 +2,7 @@
 {
     public abstract class Alive : PlayerState
     {
-        protected Alive(Player player, PlayerStateMachine playerStateMachine) : base(player, playerStateMachine) { }
+        protected Alive(Player.Player player, PlayerStateMachine playerStateMachine) : base(player, playerStateMachine) { }
 
         public override void Update()
         {
