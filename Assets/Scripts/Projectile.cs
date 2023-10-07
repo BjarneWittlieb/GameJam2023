@@ -1,7 +1,6 @@
 ﻿using System;
 using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class Projectile : MonoBehaviour
 {
@@ -9,12 +8,12 @@ public class Projectile : MonoBehaviour
     [SerializeField] private GameObject hitEffect;
     [SerializeField] private AudioClip hitSound;
     [SerializeField] private AudioClip shotSound;
-    [Header("Info")]
-    [SerializeField] private float     bulletSpeed;
-    [SerializeField] private int   damage;
-    [SerializeField] private float knockback;
+
+    [Header("Info")] [SerializeField] private float bulletSpeed;
+
+    [SerializeField] public int damage;
     [SerializeField] private float lifeTime;
-    private                  float isoFactor;
+    private float isoFactor;
 
     private void Awake()
     {
