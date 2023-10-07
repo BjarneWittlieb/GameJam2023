@@ -17,17 +17,17 @@ namespace RoomGeneration
             public static class Enemies
             {
                 public static RoomObject MeleeGroup3Far = new RoomObject(
-                    "MeleeGroup3",
+                    "EnemyPatterns/MeleeGroup3",
                     new Vector2[] { new Vector2(-1.9f, -.15f), new Vector2(2.79f, -2.58f) }, 
                     6
                 );
                 public static RoomObject MeleeGroup3Near = new RoomObject(
-                    "MeleeGroup3", 
+                    "EnemyPatterns/MeleeGroup3", 
                     new Vector2[] { new Vector2(-7.67f, -3.71f), new Vector2(-5.08f, -7.27f) }, 
                     9
                 );
                 public static RoomObject MeleeAloneFar = new RoomObject(
-                    "MeleeAlone",
+                    "EnemyPatterns/MeleeAlone",
                     new Vector2[] {
                         new Vector2(-1.48f, 3.4f),
                         new Vector2(-0.95f, 0.01f),
@@ -37,7 +37,7 @@ namespace RoomGeneration
                     2
                 );
                 public static RoomObject MeleeAloneNear = new RoomObject(
-                    "MeleeAlone", 
+                    "EnemyPatterns/MeleeAlone", 
                     new Vector2[] { new Vector2(-9.31f, .94f), new Vector2(-5.27f, .29f) },
                     2
                 );
