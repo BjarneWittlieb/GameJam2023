@@ -46,9 +46,9 @@ namespace Player
 
                 if (hitSound)
                     AudioSource.PlayClipAtPoint(hitSound, transform.position);
-
-                Destroy(gameObject);
             }
+
+            Destroy(gameObject);
         }
     }
 }
