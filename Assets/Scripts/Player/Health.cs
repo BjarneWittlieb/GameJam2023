@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 
-namespace PlayerScripts
+namespace Player
 {
-    public class PlayerHealth : MonoBehaviour
+    public class Health : MonoBehaviour
     {
         public delegate void DeathEvent();
 

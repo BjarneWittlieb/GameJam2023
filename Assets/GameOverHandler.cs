@@ -1,3 +1,4 @@
+using Player;
 using PlayerScripts;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,12 +8,12 @@ public class GameOverHandler : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        PlayerHealth.OnDeath += ShowGameOver;
+        Health.OnDeath += ShowGameOver;
     }
 
     private void OnDisable()
     {
-        PlayerHealth.OnDeath -= ShowGameOver;
+        Health.OnDeath -= ShowGameOver;
     }
 
 

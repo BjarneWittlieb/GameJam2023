@@ -1,4 +1,5 @@
 using System;
+using Player;
 using PlayerScripts;
 using Unity.Mathematics;
 using UnityEngine;
@@ -40,7 +41,7 @@ namespace Enemy
             var enemyVelocity = gameObject.GetComponent<NavMeshAgent>().velocity.normalized / recoilDivisor;
             other.rigidbody.AddForce(enemyVelocity, ForceMode2D.Force);
             Debug.Log($"Player was hit with {damage} Damage");
-            other.gameObject.GetComponent<PlayerHealth>().ProcessHit(damage);
+            other.gameObject.GetComponent<Health>().ProcessHit(damage);
         }
 
         protected virtual void Update()

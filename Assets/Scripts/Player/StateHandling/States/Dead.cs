@@ -2,7 +2,7 @@
 {
     public class Dead : PlayerState
     {
-        public Dead(Player player, PlayerStateMachine playerStateMachine) : base(player, playerStateMachine) { }
+        public Dead(Player.Player player, PlayerStateMachine playerStateMachine) : base(player, playerStateMachine) { }
 
         public override State  Key      => State.Dead;
         public override string AnimName => "Dead";

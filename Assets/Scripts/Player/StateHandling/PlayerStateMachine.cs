@@ -4,11 +4,11 @@ namespace PlayerScripts.StateHandling
 {
     public class PlayerStateMachine
     {
-        private readonly Player                         player;
+        private readonly Player.Player                         player;
         public           PlayerState                    CurrentState { get; private set; }
         private readonly Dictionary<State, PlayerState> states = new();
 
-        public PlayerStateMachine(Player player)
+        public PlayerStateMachine(Player.Player player)
         {
             this.player = player;
 
@@ -41,7 +41,7 @@ namespace PlayerScripts.StateHandling
                 if (type.IsAbstract || !type.IsSubclassOf(baseType))
                     continue;
             
-                var constructor = type.GetConstructor(new[] { typeof(Player), typeof(PlayerStateMachine) });
+                var constructor = type.GetConstructor(new[] { typeof(Player.Player), typeof(PlayerStateMachine) });
 
                 if (constructor != null)
                 {

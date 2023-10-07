@@ -7,14 +7,14 @@ namespace PlayerScripts.StateHandling
         private readonly int      animHash;
         private          Animator animator;
 
-        protected PlayerState(Player player, PlayerStateMachine playerStateMachine)
+        protected PlayerState(Player.Player player, PlayerStateMachine playerStateMachine)
         {
             Player             = player;
             PlayerStateMachine = playerStateMachine;
             animHash           = Animator.StringToHash(AnimName);
         }
 
-        protected       Player             Player             { get; }
+        protected       Player.Player             Player             { get; }
         protected       PlayerStateMachine PlayerStateMachine { get; }
         public abstract State           Key                { get; }
         public abstract string             AnimName           { get; }
