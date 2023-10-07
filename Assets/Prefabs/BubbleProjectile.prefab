@@ -51,7 +51,7 @@ MonoBehaviour:
   hitSound: {fileID: 0}
   shotSound: {fileID: 0}
   bulletSpeed: 10
-  damage: 1
+  damageMultiply: 1
   lifeTime: 4
 --- !u!58 &740338934695460061
 CircleCollider2D:

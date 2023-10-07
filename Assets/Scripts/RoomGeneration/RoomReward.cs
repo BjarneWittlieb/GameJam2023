@@ -9,11 +9,17 @@ namespace RoomGeneration
 {
     public class RoomReward
     {
+        public static RoomReward[] Rewards = new RoomReward[]
+        {
+            new RoomReward { PrefabPath = "DamageReward" },
+            new RoomReward { PrefabPath = "HealthReward" }
+        };
+
         public string PrefabPath { get; set; }
 
         public GameObject GetRewardItem()
         {
-            throw new NotImplementedException();
+            return Resources.Load("LevelPrefabians/Rewards/" + PrefabPath) as GameObject;
         }
     }
 }

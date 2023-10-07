@@ -232,7 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d32e353a374a46ad92a1884accd394c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
+  health: 10
   damage: 1
   stunTimer: 0
   stunDuration: 0.2

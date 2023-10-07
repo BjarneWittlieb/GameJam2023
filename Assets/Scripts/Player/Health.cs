@@ -44,5 +44,13 @@ namespace Player
 
             if (OnDeath != null) OnDeath();
         }
+
+        public void UpgradeMaxHealth()
+        {
+            maxHealth += 1;
+            health += 1;
+
+            if (OnHealthChange != null) OnHealthChange(health, maxHealth);
+        }
     }
 }

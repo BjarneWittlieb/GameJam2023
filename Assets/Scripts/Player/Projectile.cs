@@ -57,7 +57,7 @@ namespace Player
             
             if (other.gameObject.CompareTag("Enemy"))
             {
-                other.gameObject.GetComponent<Enemy.Enemy>().TakeDamage(damage);
+                other.gameObject.GetComponent<Enemy.Enemy>().TakeDamage((int) (baseDamage * damageMultiply));
             }
 
             if (hitEffect)

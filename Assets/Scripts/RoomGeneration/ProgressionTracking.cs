@@ -23,6 +23,8 @@ public class ProgressionTracking
     {
         this.enemyCount = enemyCount;
         RoomState = RoomState.Fighting;
+
+        
     }
 
     public void KillEnemy() {

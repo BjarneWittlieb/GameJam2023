@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Player;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,23 +11,28 @@ namespace Assets.Scripts.Player
     public class PlayerRewardHandler: MonoBehaviour
     {
         PlayerMovement playerMovement;
+        RangedAttack playerAttack;
+        Health playerHealth;
 
         public void Start()
         {
             playerMovement = GetComponent<PlayerMovement>();
+            playerAttack = GetComponent<RangedAttack>();
+            playerHealth = GetComponent<Health>();
         }
 
-        public void AddDamageReward(int strength)
+        public void AddDamageReward()
         {
+            playerAttack.baseDamage += 1;
+        }
+
+        public void AddHealthReward() {
+            playerHealth.UpgradeMaxHealth();
             
         }
 
-        public void AddHealthReward(int strength) { 
-        
-        }
-
         public void AddSpeedReward(int strength) { 
-        
+            
         }
 
         public void AddLifeRegReward(int strength) { 

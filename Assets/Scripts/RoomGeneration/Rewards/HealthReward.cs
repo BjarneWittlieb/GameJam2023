@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace RoomGeneration.Rewards
 {
-    public class DamageReward : RoomRewardBase
+    public class HealthReward : RoomRewardBase
     {
         protected override void AddPlayerReward()
         {
-            rewardHandler.AddDamageReward();
+            rewardHandler.AddHealthReward();
         }
     }
 }
