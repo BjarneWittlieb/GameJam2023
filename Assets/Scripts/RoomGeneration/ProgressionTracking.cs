@@ -24,7 +24,7 @@ public class ProgressionTracking
         this.enemyCount = enemyCount;
         RoomState = RoomState.Fighting;
 
-        
+        Debug.Log("RESET COUNT TO " + this.enemyCount);
     }
 
     public void KillEnemy() {
@@ -34,6 +34,8 @@ public class ProgressionTracking
             roomCreator.SpawnRoomItem();
             RoomState = RoomState.CollectingItem;
         }
+
+        Debug.Log("ENEMY KILLED NOW COUNT " + enemyCount);
     }
 
     public void ItemCollected()

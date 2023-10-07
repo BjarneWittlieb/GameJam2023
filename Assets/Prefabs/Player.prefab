@@ -79,6 +79,7 @@ GameObject:
   - component: {fileID: 6982611574050487130}
   - component: {fileID: 8779796805543495367}
   - component: {fileID: 2980662723278130701}
+  - component: {fileID: 8684691199093478652}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -156,7 +157,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e32902b82616789409501d74fffa840a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 6
+--- !u!114 &8684691199093478652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1519444264200571714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 260be03b29b55744ea86d1537e80b6c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5355517284262159519
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,6 +302,7 @@ MonoBehaviour:
   projectile: {fileID: 4463007139195918617, guid: 6bf52f1331b75ca478f4b29d4f9ac62b, type: 3}
   projectileSpawnPoint: {fileID: 6796144323907665391}
   cooldown: 0.2
+  baseDamage: 10
 --- !u!1 &8711620313018611838
 GameObject:
   m_ObjectHideFlags: 0
