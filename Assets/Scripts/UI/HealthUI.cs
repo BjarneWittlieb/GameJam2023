@@ -11,7 +11,7 @@ public class HealthUI : MonoBehaviour
     private HealthSymbol healthSymbolTemplate;
 
     private List<HealthSymbol> healthSymbols = new List<HealthSymbol>();
-    private static readonly float OFFSET = .16f;
+    private static readonly float OFFSET = 48.5f;
 
     // Start is called before the first frame update
     void Awake()
