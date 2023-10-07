@@ -7,6 +7,9 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D playerRigid;
     private Quaternion initialRotation;
 
+    private bool  facingRight = true;
+    private  float facingDir   = 1;
+
     // public Variablen sieht man im Inspector-Fenster von Unity und kann sie dort modifizieren
     // der zugewiesene Wert ist ein Default
     public float speedMod = 1.0f;
@@ -19,10 +22,29 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        playerRigid.velocity = speedMod * computeIsometricVelocity();
+        playerRigid.velocity = speedMod * ComputeIsometricVelocity();
+
+        FlipController();
     }
 
-    Vector2 computeIsometricVelocity()
+    private void FlipController()
+    {
+        switch (playerRigid.velocity.x)
+        {
+            case > 0 when !facingRight:
+            case < 0 when facingRight: Flip();
+                break;
+        }
+    }
+
+    private void Flip()
+    {
+        facingDir   *= -1;
+        facingRight =  !facingRight;
+        transform.Rotate(0, 180, 0);
+    }
+
+    private static Vector2 ComputeIsometricVelocity()
     {
         var x = Input.GetAxis("Horizontal");
         var y = Input.GetAxis("Vertical");
