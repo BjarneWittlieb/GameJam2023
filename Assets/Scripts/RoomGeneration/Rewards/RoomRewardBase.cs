@@ -11,13 +11,16 @@ namespace RoomGeneration.Rewards
 
         void Start()
         {
-            GameObject.Find("Player").GetComponent<PlayerRewardHandler>();
+            var playerObject = GameObject.Find("Player");
+            rewardHandler = playerObject.GetComponent<PlayerRewardHandler>();
         }
 
         protected abstract void AddPlayerReward();
 
         protected void OnCollisionEnter2D(Collision2D other)
         {
+            if (other.gameObject.name != "Player") return;
+
             AddPlayerReward();
 
             Destroy(this.gameObject);
