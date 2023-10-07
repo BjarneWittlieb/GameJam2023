@@ -17,6 +17,10 @@ namespace Player
         [SerializeField] private float lifeTime;
         private float isoFactor;
 
+        private                 Animator animator;
+        private                 bool     pop;
+        private static readonly int      Pop = Animator.StringToHash("pop");
+
         private void Awake()
         {
             var norm = transform.TransformDirection(Vector3.right);
@@ -25,23 +29,33 @@ namespace Player
 
         private void Start()
         {
+            animator = GetComponentInChildren<Animator>();
+            
             if (shotSound)
                 AudioSource.PlayClipAtPoint(shotSound, transform.position);
 
-            Destroy(gameObject, lifeTime);
+            Invoke(nameof(DestroyInternal), lifeTime);
         }
 
         private void FixedUpdate()
         {
+            if (pop)
+                return;
+            
             transform.Translate(Vector3.right * (bulletSpeed * isoFactor * Time.deltaTime), Space.Self);
         }
 
         private void OnCollisionEnter2D(Collision2D other)
         {
+            Debug.Log("hit");
+            if (pop)
+                return;
+            
+            DestroyInternal();
+            
             if (other.gameObject.CompareTag("Enemy"))
             {
-                if(other.gameObject.GetComponent<Enemy.Enemy>().TakeDamage(damage))
-                    return; // if enemy is dead
+                other.gameObject.GetComponent<Enemy.Enemy>().TakeDamage(damage);
             }
 
             if (hitEffect)
@@ -49,8 +63,15 @@ namespace Player
 
             if (hitSound)
                 AudioSource.PlayClipAtPoint(hitSound, transform.position);
+        }
 
-            Destroy(gameObject);
+        private void DestroyInternal()
+        {
+            pop = true;
+            animator.SetBool(Pop, pop);
+            var stateInfo     = animator.GetCurrentAnimatorStateInfo(0);
+            var remainingTime = stateInfo.length - stateInfo.normalizedTime * stateInfo.length;
+            Destroy(gameObject, remainingTime);
         }
     }
 }
