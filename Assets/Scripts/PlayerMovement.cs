@@ -33,6 +33,6 @@ public class PlayerMovement : MonoBehaviour
 
     void LateUpdate()
     {
-        transform.rotation = initialRotation;
+        // transform.rotation = initialRotation;
     }
 }
