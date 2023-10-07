@@ -12,26 +12,26 @@ namespace RoomGeneration
     {
         public static Room CreateRoom(Transform levelRoot, RoomSettings settings) {
             var room = new Room(levelRoot);
-            
-            int enemyScoreLeft = settings.TotalObstacleScore;
-            while (true)
-            {
-                var availableEnemies = RoomObject.Enemies.Where(e => e.DifficultyScore < enemyScoreLeft && e.DifficultyScore < settings.MaximalEnemyBatchScore);
-                if (!availableEnemies.Any()) {
-                    break;
-                }
-                var enemy = availableEnemies.ElementAt(UnityEngine.Random.Range(0, availableEnemies.Count()));
-                
-            }
 
-            while (true)
-            {
-                // something
-            }
+            PopulateRoom(room, levelRoot, settings.TotalEnemyScore, settings.MaximalEnemyBatchScore, RoomObject.Enemies);
+            PopulateRoom(room, levelRoot, settings.TotalObstacleScore, settings.MaximalObstacleBatchScore, new RoomObject[] { });
 
             return room;
         }
 
-
+        private static void PopulateRoom(Room room, Transform levelRoot, int maximumScore, int maximumBatchScore, RoomObject[] ojbects)
+        {
+            int scoreLeft = maximumScore;
+            while (true)
+            {
+                var availableObjects = RoomObject.Enemies.Where(e => e.DifficultyScore < scoreLeft && e.DifficultyScore < maximumBatchScore);
+                if (!availableObjects.Any())
+                {
+                    break;
+                }
+                var roomObject = availableObjects.ElementAt(UnityEngine.Random.Range(0, availableObjects.Count()));
+                room.AddRoomObject(roomObject);
+            }
+        }
     }
 }

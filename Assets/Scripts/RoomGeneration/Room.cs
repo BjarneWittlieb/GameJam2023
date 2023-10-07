@@ -18,6 +18,11 @@ namespace RoomGeneration
             objects = new List<RoomObject>();
         }
 
+        public void AddRoomObject(RoomObject roomObject)
+        {
+            objects.Add(roomObject);
+        }
+
         public virtual void AddToScene()
         {
             foreach(RoomObject roomObject in objects)
