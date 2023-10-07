@@ -10,7 +10,7 @@ namespace Enemy
         private Vignette vignette;
 
         private void Start()
-        {
+        {   
             fxVolume.profile.TryGetSettings(out vignette);
         }
 
