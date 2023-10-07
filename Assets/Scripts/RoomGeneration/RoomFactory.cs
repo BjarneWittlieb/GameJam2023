@@ -14,17 +14,19 @@ namespace RoomGeneration
             var room = new Room(levelRoot);
             
             int enemyScoreLeft = settings.TotalObstacleScore;
-            
-
-
             while (true)
             {
-                var availableEnemies = RoomObject.Enemies.Where(e => e.DifficultyScore < enemyScoreLeft);
+                var availableEnemies = RoomObject.Enemies.Where(e => e.DifficultyScore < enemyScoreLeft && e.DifficultyScore < settings.MaximalEnemyBatchScore);
                 if (!availableEnemies.Any()) {
                     break;
                 }
                 var enemy = availableEnemies.ElementAt(UnityEngine.Random.Range(0, availableEnemies.Count()));
                 
+            }
+
+            while (true)
+            {
+                // something
             }
 
             return room;
