@@ -5,11 +5,13 @@ public class EnemyMovement : MonoBehaviour
 {
     public GameObject player;
     public float speedMod = 1f;
-    public float aggroRadius = 5f; // primaraly for meele enemies
+    public float aggroRadius = 5f; // primaraly for meele enemies, if set to 0 enemy is always aggro
+
     private NavMeshAgent _agent;
     private Enemy.Enemy _enemy;
 
     private Rigidbody2D _enemyRigid;
+    private bool hasAggro;
 
 
     // Start is called before the first frame update
@@ -29,9 +31,10 @@ public class EnemyMovement : MonoBehaviour
     private void Update()
     {
         _agent.SetDestination(player.transform.position);
-        if (_enemy.stunTimer <= 0 && (_agent.remainingDistance < aggroRadius || aggroRadius == 0f))
+        if (_enemy.stunTimer <= 0 && (_agent.remainingDistance < aggroRadius || aggroRadius == 0f || hasAggro))
         {
             _agent.enabled = true;
+            hasAggro = true;
             var desiredVelocity = _agent.desiredVelocity;
             _agent.velocity = new Vector3(desiredVelocity.x, desiredVelocity.y / 2, desiredVelocity.z);
         }
