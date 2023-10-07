@@ -1,18 +1,15 @@
 using NavMeshPlus.Components;
 using RoomGeneration;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class RoomContentCreation : MonoBehaviour
 {
     public NavMeshSurface navMesh;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        Room room = RoomFactory.CreateRoom(this.transform, new RoomGeneration.RoomSettings(1));
+        var room = RoomFactory.CreateRoom(transform, new RoomSettings(5));
 
         room.PopulateObstacles();
 
@@ -22,8 +19,7 @@ public class RoomContentCreation : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
     }
 }
