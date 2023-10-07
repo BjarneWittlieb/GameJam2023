@@ -1426,6 +1426,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1594898588498222664}
   - component: {fileID: 3169659382051235919}
+  - component: {fileID: 8573549467708704867}
   m_Layer: 0
   m_Name: IsometricReference
   m_TagString: Untagged
@@ -1461,3 +1462,57 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 2
   m_CellSwizzle: 0
+--- !u!60 &8573549467708704867
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6161559317654619431}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 7.0076203, y: 0.0014410019}
+      - {x: 9.888389, y: 1.6284771}
+      - {x: 5.4389405, y: 3.9623094}
+      - {x: -5.472047, y: 3.3088806}
+      - {x: -9.161207, y: 1.7654568}
+      - {x: -6.9879994, y: -0.46023342}
+      - {x: -4.0280166, y: 1.0149986}
+      - {x: 0.019695997, y: -0.9556049}
+      - {x: 4.506733, y: 1.2441137}
+  m_UseDelaunayMesh: 0
