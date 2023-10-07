@@ -21,7 +21,7 @@ public class RangedEnemy : Enemy.Enemy
 
 
     // Update is called once per frame
-    private void Update()
+    protected override void Update()
     {
         if (DateTime.Now <= _nextFire) return;
         FireProjectile();

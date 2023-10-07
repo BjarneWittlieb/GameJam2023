@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6076858538506958654}
   - component: {fileID: 2289177234911567540}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30a53c41c2a8dcc498e43f82c8c0db33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMod: 2.4538
+  speedMod: 4.732
 --- !u!50 &8779796805543495367
 Rigidbody2D:
   serializedVersion: 4
@@ -142,7 +142,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &2980662723278130701
 MonoBehaviour:
@@ -314,7 +314,7 @@ Transform:
   m_GameObject: {fileID: 8711620313018611838}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.2, z: 0}
+  m_LocalPosition: {x: 0.1, y: 0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
