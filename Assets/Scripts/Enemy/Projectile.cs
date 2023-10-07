@@ -4,14 +4,21 @@ using UnityEngine.Rendering.PostProcessing;
 
 namespace Enemy
 {
-    public class Projectile : Player.Projectile
+    public class Projectile : MonoBehaviour
     {
         public PostProcessVolume fxVolume;
+        public int damage;
+        protected AudioClip hitSound;
+        protected AudioClip shotSound;
         private Vignette vignette;
+        private float lifeTime;
 
         private void Start()
         {
-            fxVolume.profile.TryGetSettings(out vignette);
+            if (shotSound)
+                AudioSource.PlayClipAtPoint(shotSound, transform.position);
+
+            Destroy(gameObject, lifeTime);
         }
 
         private void OnCollisionEnter2D(Collision2D other)
