@@ -1,14 +1,12 @@
 using System;
 using UnityEngine;
 
-// ReSharper disable All
-
 public class PlayerMovement : MonoBehaviour
 {
+    private static int RATIO_X_VELOCITY_TO_Y_VELOCITY = 2;
     private Rigidbody2D playerRigid;
     private Quaternion initialRotation;
 
-    // ReSharper disable once CommentTypo
     // public Variablen sieht man im Inspector-Fenster von Unity und kann sie dort modifizieren
     // der zugewiesene Wert ist ein Default
     public float speedMod = 1.0f;
@@ -21,15 +19,16 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        playerRigid.velocity = speedMod * computeVelocity();
+        playerRigid.velocity = speedMod * computeIsometricVelocity();
     }
 
-    Vector2 computeVelocity()
+    Vector2 computeIsometricVelocity()
     {
         var x = Input.GetAxis("Horizontal");
         var y = Input.GetAxis("Vertical");
         var scaleFactor = Math.Max(Math.Abs(x), Math.Abs(y));
-        return new Vector2(x * scaleFactor, y * scaleFactor / 2);
+        return Vector2.Scale(new Vector2(x, y).normalized,
+            new Vector2(scaleFactor, scaleFactor / RATIO_X_VELOCITY_TO_Y_VELOCITY));
     }
 
     void LateUpdate()
