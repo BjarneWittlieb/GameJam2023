@@ -1,17 +1,18 @@
-﻿using System;
-using Unity.Mathematics;
+﻿using Unity.Mathematics;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
     [SerializeField] private GameObject hitEffect;
     [SerializeField] private AudioClip  hitSound;
+    [SerializeField] private AudioClip  shotSound;
     [SerializeField] private float      bulletSpeed;
     [SerializeField] private float      lifeTime;
 
     private void FixedUpdate()
     {
-        transform.Translate(Vector2.right * (bulletSpeed * Time.deltaTime));
+        var isometricRight = new Vector2(1, 0.5f).normalized;
+        transform.Translate(isometricRight * (bulletSpeed * Time.deltaTime));
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -29,6 +30,9 @@ public class Projectile : MonoBehaviour
 
     private void Start()
     {
+        if(shotSound)
+            AudioSource.PlayClipAtPoint(shotSound, transform.position);
+        
         Destroy(gameObject, lifeTime);
     }
 }
