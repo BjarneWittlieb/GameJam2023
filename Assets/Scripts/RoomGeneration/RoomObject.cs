@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.IO;
+using UnityEngine;
 
 namespace RoomGeneration
 {
@@ -18,27 +19,27 @@ namespace RoomGeneration
             {
                 public static RoomObject MeleeGroup3Far = new RoomObject(
                     "EnemyPatterns/MeleeGroup3",
-                    new Vector2[] { new Vector2(-1.9f, -.15f), new Vector2(2.79f, -2.58f) }, 
+                    new Vector2[] { new Vector2(1.14f, .58f), new Vector2(5.57f, -5.25f) }, 
                     6
                 );
                 public static RoomObject MeleeGroup3Near = new RoomObject(
                     "EnemyPatterns/MeleeGroup3", 
-                    new Vector2[] { new Vector2(-7.67f, -3.71f), new Vector2(-5.08f, -7.27f) }, 
+                    new Vector2[] { new Vector2(-4.22f, -7.04f), new Vector2(-3.03f, -10.35f) }, 
                     9
                 );
                 public static RoomObject MeleeAloneFar = new RoomObject(
                     "EnemyPatterns/MeleeAlone",
                     new Vector2[] {
-                        new Vector2(-1.48f, 3.4f),
-                        new Vector2(-0.95f, 0.01f),
-                        new Vector2(-6.36f, 4.98f),
-                        new Vector2(1.8f, 6.43f)
+                        new Vector2(5.67f, 4.31f),
+                        new Vector2(5.93f, -1.54f),
+                        new Vector2(4.01f, 2.93f),
+                        new Vector2(.89f, 1.14f)
                     },
                     2
                 );
                 public static RoomObject MeleeAloneNear = new RoomObject(
                     "EnemyPatterns/MeleeAlone", 
-                    new Vector2[] { new Vector2(-9.31f, .94f), new Vector2(-5.27f, .29f) },
+                    new Vector2[] { new Vector2(-3.81f, -4.85f), new Vector2(-10.84f, -1.7f) },
                     2
                 );
             }
@@ -49,20 +50,26 @@ namespace RoomGeneration
             }
         }
 
+        public RoomObjectType Type { get; private set; }
+
         protected UnityEngine.Vector2[] positions;
 
         private string PrefabPath { get; set; }
 
+        private UnityEngine.Object loadedPrefab { get; set; }
+
         public int DifficultyScore { get; private set; }
 
-        public RoomObject(string path, UnityEngine.Vector2 position, int difficulty = 0)
+        private GameObject addedObject;
+
+        public RoomObject(string path, UnityEngine.Vector2 position, int difficulty = 0, RoomObjectType type = RoomObjectType.Agent)
         {
             this.PrefabPath = path;
             this.positions = new UnityEngine.Vector2[] { position };
             DifficultyScore = difficulty;
         }
 
-        public RoomObject(string path, UnityEngine.Vector2[] positions, int difficulty = 0)
+        public RoomObject(string path, UnityEngine.Vector2[] positions, int difficulty = 0, RoomObjectType type = RoomObjectType.Agent)
         {
             this.PrefabPath = path;
             this.positions = positions;
@@ -71,9 +78,32 @@ namespace RoomGeneration
 
         public virtual void AddToScene(Transform levelRoot)
         {
-            var addedObject = UnityEngine.Object.Instantiate(Resources.Load("LevelPrefabians/" + PrefabPath), levelRoot) as GameObject;
+            addedObject = UnityEngine.Object.Instantiate(LoadPrefab(), levelRoot) as GameObject;
             var position = positions[UnityEngine.Random.Range(0, positions.Length)];
             addedObject.transform.position = new UnityEngine.Vector3(position.x, position.y, addedObject.transform.position.z);
+        }
+
+        private UnityEngine.Object LoadPrefab()
+        {
+            // Cache objects in memory, so loading becomes faster
+            if (this.loadedPrefab != null) return this.loadedPrefab;
+
+            var loadedObject = Resources.Load("LevelPrefabians/" + PrefabPath);
+            if (loadedObject == null)
+            {
+                throw new FileNotFoundException("No file at " + PrefabPath);
+            }
+            if (this.loadedPrefab == null)
+            {
+                this.loadedPrefab = loadedObject;
+            }
+
+            return loadedObject;
+        }
+
+        public void RemoveFromScene()
+        {
+            GameObject.Destroy(addedObject);
         }
     }
 }
