@@ -5,9 +5,9 @@ public class EnemyMovement : MonoBehaviour
 {
     public Rigidbody2D playerRigid;
     public float speedMod = 1f;
-    private NavMeshAgent agent;
+    private NavMeshAgent _agent;
 
-    private Rigidbody2D enemyRigid;
+    private Rigidbody2D _enemyRigid;
 
 
     // Start is called before the first frame update
@@ -15,9 +15,9 @@ public class EnemyMovement : MonoBehaviour
     {
         //enemyRigid = GetComponent<Rigidbody2D>();
 
-        agent = GetComponent<NavMeshAgent>();
-        agent.updateRotation = false;
-        agent.updateUpAxis = false;
+        _agent = GetComponent<NavMeshAgent>();
+        _agent.updateRotation = false;
+        _agent.updateUpAxis = false;
     }
 
 
@@ -34,6 +34,8 @@ public class EnemyMovement : MonoBehaviour
         //
         //enemyRigid.velocity = velocity * speedMod;
 
-        agent.SetDestination(playerRigid.position);
+        _agent.SetDestination(playerRigid.position);
+        var desiredVelocity = _agent.desiredVelocity;
+        _agent.velocity = new Vector3(desiredVelocity.x, desiredVelocity.y / 2, desiredVelocity.z);
     }
 }
