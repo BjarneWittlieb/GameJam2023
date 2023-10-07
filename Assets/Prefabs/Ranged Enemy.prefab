@@ -236,9 +236,10 @@ MonoBehaviour:
   damage: 1
   stunTimer: 0
   stunDuration: 0.2
-  deathEffect: {fileID: 0}
+  deathEffect: {fileID: 6631738932900923114, guid: e72b70b43cbc58d4e89504ce4edacbdc, type: 3}
   recoilDivisor: 15
   fireRate: 900
   rangedDamage: 3
-  projectile: {fileID: 583958488102015891, guid: ee37cec4bf6a345caae78523dcd46273, type: 3}
+  fxVolume: {fileID: 0}
+  projectile: {fileID: 3845937625751165738, guid: ee37cec4bf6a345caae78523dcd46273, type: 3}
   projectileSpawnPoint: {fileID: 5711692539524209863}
