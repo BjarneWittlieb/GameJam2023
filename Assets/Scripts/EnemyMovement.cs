@@ -16,6 +16,8 @@ public class EnemyMovement : MonoBehaviour
         //enemyRigid = GetComponent<Rigidbody2D>();
 
         agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
     }
 
 
