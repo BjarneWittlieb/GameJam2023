@@ -1,14 +1,11 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace PlayerScripts
 {
     public class RangedAttack : MonoBehaviour
     {
         [SerializeField] private GameObject projectile;
-        
-        [SerializeField] private Transform shotPoint;
-        [SerializeField] private Transform gun;
+        [SerializeField] private Transform projectileSpawnPoint;
         
         private void Update()
         {
@@ -17,20 +14,17 @@ namespace PlayerScripts
         }
 
         private void FireProjectile()
-        {
-            var differance = Input.mousePosition - gun.transform.position;
-            var rotZ       = Mathf.Atan2(differance.y, differance.x) * Mathf.Rad2Deg;
-            gun.transform.rotation = Quaternion.Euler(0f, 0f, rotZ);
-            
-            Vector3 mouseScreenPosition = Input.mousePosition;
-            Vector3 mouseWorldPosition  = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
+        {   
+            var mouseScreenPosition = Input.mousePosition;
+            var mouseWorldPosition  = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
 
-            Vector2 directionToMouse = (Vector2)(mouseWorldPosition - transform.position);
-            float   angle            = Mathf.Atan2(directionToMouse.y, directionToMouse.x) * Mathf.Rad2Deg;
+            var directionToMouse = (Vector2)(mouseWorldPosition - transform.position);
+            var   angle            = Mathf.Atan2(directionToMouse.y, directionToMouse.x) * Mathf.Rad2Deg;
 
-            gun.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+            Transform projectileSpawnTransform;
+            (projectileSpawnTransform = projectileSpawnPoint.transform).rotation = Quaternion.Euler(0f, 0f, angle);
             
-            Instantiate(projectile, shotPoint.position, shotPoint.transform.rotation);
+            Instantiate(projectile, projectileSpawnPoint.position, projectileSpawnTransform.rotation);
         }
 
         private void OnDrawGizmos()
