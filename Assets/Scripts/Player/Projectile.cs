@@ -6,8 +6,8 @@ namespace Player
 {
     public class Projectile : MonoBehaviour
     {
-        [Header("Effects")]
-        [SerializeField] protected GameObject hitEffect;
+        [Header("Effects")] [SerializeField] protected GameObject hitEffect;
+
         [SerializeField] protected AudioClip hitSound;
         [SerializeField] protected AudioClip shotSound;
 
@@ -40,17 +40,15 @@ namespace Player
         {
             if (other.gameObject.CompareTag("Enemy"))
             {
-                if(other.gameObject.GetComponent<Enemy.Enemy>().TakeDamage(damage))
-                    return; // if enemy is dead
+                other.gameObject.GetComponent<Enemy.Enemy>().TakeDamage(damage);
+                if (hitEffect)
+                    Instantiate(hitEffect, other.contacts[0].point, quaternion.identity);
+
+                if (hitSound)
+                    AudioSource.PlayClipAtPoint(hitSound, transform.position);
+
+                Destroy(gameObject);
             }
-
-            if (hitEffect)
-                Instantiate(hitEffect, other.contacts[0].point, quaternion.identity);
-
-            if (hitSound)
-                AudioSource.PlayClipAtPoint(hitSound, transform.position);
-
-            Destroy(gameObject);
         }
     }
 }
