@@ -129,10 +129,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2696966014657611630}
+  - component: {fileID: -8886734721682833}
   - component: {fileID: 4883441439928143715}
   - component: {fileID: 9047786905503548971}
   - component: {fileID: 2617448593737384384}
-  - component: {fileID: -8886734721682833}
   m_Layer: 0
   m_Name: Ranged Enemy
   m_TagString: Enemy
@@ -156,6 +156,29 @@ Transform:
   - {fileID: 5711692539524209863}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-8886734721682833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8742621547610125277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9bc986d90ac494fb53e8f54e1ccdcff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 1
+  damage: 1
+  stunTimer: 0
+  stunDuration: 0.2
+  deathEffect: {fileID: 6631738932900923114, guid: e72b70b43cbc58d4e89504ce4edacbdc, type: 3}
+  recoilDivisor: 15
+  fireRate: 900
+  rangedDamage: 3
+  fxVolume: {fileID: 0}
+  projectile: {fileID: 3845937625751165738, guid: ee37cec4bf6a345caae78523dcd46273, type: 3}
+  projectileSpawnPoint: {fileID: 5711692539524209863}
 --- !u!114 &4883441439928143715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,26 +243,3 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 13
   m_ObstacleAvoidanceType: 4
---- !u!114 &-8886734721682833
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8742621547610125277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9bc986d90ac494fb53e8f54e1ccdcff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 1
-  damage: 1
-  stunTimer: 0
-  stunDuration: 0.2
-  deathEffect: {fileID: 6631738932900923114, guid: e72b70b43cbc58d4e89504ce4edacbdc, type: 3}
-  recoilDivisor: 15
-  fireRate: 900
-  rangedDamage: 3
-  fxVolume: {fileID: 0}
-  projectile: {fileID: 3845937625751165738, guid: ee37cec4bf6a345caae78523dcd46273, type: 3}
-  projectileSpawnPoint: {fileID: 5711692539524209863}
