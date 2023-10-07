@@ -1,3 +1,4 @@
+using System;
 using PlayerScripts;
 using UnityEngine;
 using UnityEngine.AI;
@@ -6,8 +7,10 @@ namespace Enemy
 {
     public abstract class Enemy : MonoBehaviour
     {
-        public int health = 1;
-        public int damage = 1;
+        public  int   health = 1;
+        public  int   damage = 1;
+        public float stunTimer;
+        public  float stunDuration = 0.2f;
 
         /// <summary>
         ///     <para>The lower the bigger the recoil of the player. 15 Seems nice</para>
@@ -37,6 +40,11 @@ namespace Enemy
             other.gameObject.GetComponent<PlayerHealth>().ProcessHit(damage);
         }
 
+        protected virtual void Update()
+        {
+            stunTimer -= Time.deltaTime;
+        }
+
         protected virtual void Attack()
         {
             var player = new Rigidbody2D();
@@ -46,12 +54,19 @@ namespace Enemy
         {
         }
 
-        public void TakeDamage(int amount)
+        public bool TakeDamage(int amount)
         {
-            health -= damage;
-            
+            Debug.Log("hit");
+            health -= amount;
+
             if (health <= 0)
+            {
                 Destroy(gameObject);
+                return true;
+            }
+            
+            stunTimer = stunDuration;
+            return false;
         }
     }
 }

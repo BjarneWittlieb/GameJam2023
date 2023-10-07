@@ -8,6 +8,7 @@ public class EnemyMovement : MonoBehaviour
     private NavMeshAgent _agent;
 
     private Rigidbody2D _enemyRigid;
+    private Enemy.Enemy _enemy;
 
 
     // Start is called before the first frame update
@@ -15,17 +16,27 @@ public class EnemyMovement : MonoBehaviour
     {
         player = GameObject.Find("Player");
 
-        _agent = GetComponent<NavMeshAgent>();
+        _enemy                = GetComponent<Enemy.Enemy>();
+        _agent                = GetComponent<NavMeshAgent>();
+        _agent                = GetComponent<NavMeshAgent>();
         _agent.updateRotation = false;
-        _agent.updateUpAxis = false;
+        _agent.updateUpAxis   = false;
     }
 
 
     // Update is called once per frame  
     private void Update()
     {
-        _agent.SetDestination(player.transform.position);
-        var desiredVelocity = _agent.desiredVelocity;
-        _agent.velocity = new Vector3(desiredVelocity.x, desiredVelocity.y / 2, desiredVelocity.z);
+        if (_enemy.stunTimer <= 0)
+        {
+            _agent.enabled = true;
+            _agent.SetDestination(player.transform.position);
+            var desiredVelocity = _agent.desiredVelocity;
+            _agent.velocity = new Vector3(desiredVelocity.x, desiredVelocity.y / 2, desiredVelocity.z);
+        }
+        else
+        {
+            _agent.enabled = false;
+        }
     }
 }

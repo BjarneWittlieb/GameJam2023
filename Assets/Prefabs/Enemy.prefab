@@ -184,6 +184,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   damage: 1
+  stunTimer: 0
+  stunDuration: 0.3
   recoilDivisor: 15
 --- !u!50 &9047786905503548971
 Rigidbody2D:

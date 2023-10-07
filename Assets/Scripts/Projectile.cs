@@ -1,6 +1,7 @@
 ﻿using System;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Projectile : MonoBehaviour
 {
@@ -10,9 +11,10 @@ public class Projectile : MonoBehaviour
     [SerializeField] private AudioClip shotSound;
     [Header("Info")]
     [SerializeField] private float     bulletSpeed;
-    [SerializeField] private int       damage;
-    [SerializeField] private float     lifeTime;
-    private                  float     isoFactor;
+    [SerializeField] private int   damage;
+    [SerializeField] private float knockback;
+    [SerializeField] private float lifeTime;
+    private                  float isoFactor;
 
     private void Awake()
     {
@@ -37,7 +39,13 @@ public class Projectile : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            other.gameObject.GetComponent<Enemy.Enemy>().TakeDamage(damage);
+            if(other.gameObject.GetComponent<Enemy.Enemy>().TakeDamage(damage))
+                return; // if enemy is dead
+            //
+            // var targetRigidbody    = other.gameObject.GetComponent<Rigidbody2D>();
+            // Vector3   direction = -other.relativeVelocity.normalized; // Opposite to projectile velocity
+            // other.gameObject.transform.Translate(direction);
+            // targetRigidbody.AddForce(direction * other.relativeVelocity.magnitude * knockback, ForceMode2D.Impulse);
         }
 
         if (hitEffect)
