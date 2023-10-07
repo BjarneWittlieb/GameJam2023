@@ -1,38 +1,49 @@
-﻿using Unity.Mathematics;
+﻿using System;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] private GameObject hitEffect;
-    [SerializeField] private AudioClip  hitSound;
-    [SerializeField] private AudioClip  shotSound;
-    [SerializeField] private float      bulletSpeed;
-    [SerializeField] private float      lifeTime;
+    [Header("Effects")] [SerializeField] protected GameObject hitEffect;
 
-    private void FixedUpdate()
-    {
-        var isometricRight = new Vector2(1, 0.5f).normalized;
-        transform.Translate(isometricRight * (bulletSpeed * Time.deltaTime));
-    }
+    [SerializeField] protected AudioClip hitSound;
+    [SerializeField] private AudioClip shotSound;
 
-    private void OnCollisionEnter2D(Collision2D other)
+    [Header("Info")] [SerializeField] private float bulletSpeed;
+
+    [SerializeField] public int damage;
+    [SerializeField] private float lifeTime;
+    private float isoFactor;
+
+    private void Awake()
     {
-        Debug.Log($"hit {other.gameObject.name}");
-        
-        if (hitEffect)
-            Instantiate(hitEffect, other.contacts[0].point, quaternion.identity);
-        
-        if (hitSound)
-            AudioSource.PlayClipAtPoint(hitSound, transform.position);
-        
-        Destroy(gameObject);
+        var norm = transform.TransformDirection(Vector3.right);
+        isoFactor = .5f + Math.Abs(norm.x) / 2f;
     }
 
     private void Start()
     {
-        if(shotSound)
+        if (shotSound)
             AudioSource.PlayClipAtPoint(shotSound, transform.position);
-        
+
         Destroy(gameObject, lifeTime);
+    }
+
+    private void FixedUpdate()
+    {
+        transform.Translate(Vector3.right * (bulletSpeed * isoFactor * Time.deltaTime), Space.Self);
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Enemy")) other.gameObject.GetComponent<Enemy.Enemy>().TakeDamage(damage);
+
+        if (hitEffect)
+            Instantiate(hitEffect, other.contacts[0].point, quaternion.identity);
+
+        if (hitSound)
+            AudioSource.PlayClipAtPoint(hitSound, transform.position);
+
+        Destroy(gameObject);
     }
 }
