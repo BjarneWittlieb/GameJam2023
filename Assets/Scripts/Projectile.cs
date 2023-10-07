@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [Header("Effects")]
-    [SerializeField] private GameObject hitEffect;
-    [SerializeField] private AudioClip hitSound;
+    [Header("Effects")] [SerializeField] protected GameObject hitEffect;
+
+    [SerializeField] protected AudioClip hitSound;
     [SerializeField] private AudioClip shotSound;
-    [Header("Info")]
-    [SerializeField] private float     bulletSpeed;
-    [SerializeField] private int       damage;
-    [SerializeField] private float     lifeTime;
-    private                  float     isoFactor;
+
+    [Header("Info")] [SerializeField] private float bulletSpeed;
+
+    [SerializeField] public int damage;
+    [SerializeField] private float lifeTime;
+    private float isoFactor;
 
     private void Awake()
     {
@@ -35,10 +36,7 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            other.gameObject.GetComponent<Enemy.Enemy>().TakeDamage(damage);
-        }
+        if (other.gameObject.CompareTag("Enemy")) other.gameObject.GetComponent<Enemy.Enemy>().TakeDamage(damage);
 
         if (hitEffect)
             Instantiate(hitEffect, other.contacts[0].point, quaternion.identity);
