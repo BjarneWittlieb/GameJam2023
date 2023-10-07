@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private static int RATIO_X_VELOCITY_TO_Y_VELOCITY = 2;
+    private static float RATIO_X_VELOCITY_TO_Y_VELOCITY = 3f / 2f;
     private Rigidbody2D playerRigid;
     private Quaternion initialRotation;
 
