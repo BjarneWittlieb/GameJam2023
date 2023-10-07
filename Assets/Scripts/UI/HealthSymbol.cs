@@ -4,13 +4,31 @@ using UnityEngine;
 
 public class HealthSymbol : MonoBehaviour
 {
-    public UnityEngine.UI.Image[] imageElements;
+    public SpriteRenderer[] healthSprites;
 
-    public void changeOpacity(float opacity)
+    public void Start()
     {
-        foreach(var item in imageElements)
+        // healthSprites = GetComponentsInChildren<SpriteRenderer>();
+    }
+
+    public void SetHealth(int health)
+    {
+        if (health == 2) {
+            changeOpacity(healthSprites[0], 1);
+            changeOpacity(healthSprites[1], 0);
+        } else if (health == 1)
         {
-            item.color = new Color(item.color.r, item.color.g, item.color.b, opacity);
+            changeOpacity(healthSprites[0], 0);
+            changeOpacity(healthSprites[1], 1);
+        } else
+        {
+            changeOpacity(healthSprites[1], 0);
+            changeOpacity(healthSprites[0], 0);
         }
+    }
+
+    public void changeOpacity(SpriteRenderer sprite, float opacity)
+    {
+        sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, opacity);
     }
 }

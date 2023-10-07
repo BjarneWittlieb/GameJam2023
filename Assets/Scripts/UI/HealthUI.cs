@@ -8,18 +8,15 @@ using UnityEngine;
 
 public class HealthUI : MonoBehaviour
 {
-    public HealthSymbol healthSymbolTemplate;
+    private HealthSymbol healthSymbolTemplate;
 
     private List<HealthSymbol> healthSymbols = new List<HealthSymbol>();
-    private static readonly float OFFSET = 32;
+    private static readonly float OFFSET = .16f;
 
     // Start is called before the first frame update
     void Awake()
     {
-        if (healthSymbolTemplate == null)
-        {
-            throw new System.Exception("You fucked up the UI. Now fix it!");
-        }
+        healthSymbolTemplate = GetComponentInChildren<HealthSymbol>();
 
         PlayerHealth.OnHealthChange += UpdateHealthUI;
     }
@@ -35,7 +32,7 @@ public class HealthUI : MonoBehaviour
 
     private void ModifyMaxHealth(int maxHealth)
     {
-        if (healthSymbols.Count == maxHealth)
+        if (healthSymbols.Count == maxHealth / 2)
         {
             return;
         }
@@ -47,27 +44,32 @@ public class HealthUI : MonoBehaviour
         healthSymbols.Clear();
         healthSymbols = new List<HealthSymbol>() { healthSymbolTemplate };
 
-        for (int i = 1; i < maxHealth; i++)
+        for (int i = 1; i < maxHealth / 2; i++)
         {
             var newHealthSymbol = Instantiate(healthSymbolTemplate, this.transform);
             newHealthSymbol.transform.position += new Vector3(OFFSET * i, 0, 0);
+            newHealthSymbol.SetHealth(2);
             healthSymbols.Add(newHealthSymbol);
         }
     }
 
     private void ModifyHealth(int health)
     {
-        var currentHealthIndex = health - 1;
+        var currentHealthIndex = (health) / 2;
+        Debug.Log("current  " + currentHealthIndex);
 
         for (int i = 0; i < healthSymbols.Count; i++)
         {
             var healthSymbol = healthSymbols[i];
-            if (i <= currentHealthIndex)
+            if (i < currentHealthIndex)
             {
-                healthSymbol.changeOpacity(1);
+                healthSymbol.SetHealth(2);
+            } else if (i == currentHealthIndex)
+            {
+                healthSymbol.SetHealth(health % 2);
             } else
             {
-                healthSymbol.changeOpacity(0.1f);
+                healthSymbol.SetHealth(0);
             }
         }
     }
