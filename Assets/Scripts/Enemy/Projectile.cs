@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using Player;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
@@ -7,19 +9,38 @@ namespace Enemy
     public class Projectile : MonoBehaviour
     {
         public PostProcessVolume fxVolume;
-        public int damage;
-        protected AudioClip hitSound;
-        protected AudioClip shotSound;
+        [SerializeField] public int damage;
+
+        [Header("Effects")] [SerializeField] protected GameObject hitEffect;
+        [SerializeField] protected AudioClip hitSound;
+        [SerializeField] protected AudioClip shotSound;
+
+        [Header("Info")] [SerializeField] private float bulletSpeed;
+        [SerializeField] private float lifeTime;
+        private float isoFactor;
         private Vignette vignette;
-        private float lifeTime;
+
+        private void Awake()
+        {
+            var norm = transform.TransformDirection(Vector3.right);
+            isoFactor = .5f + Math.Abs(norm.x) / 2f;
+        }
 
         private void Start()
         {
+            fxVolume.profile.TryGetSettings(out vignette);
+
             if (shotSound)
                 AudioSource.PlayClipAtPoint(shotSound, transform.position);
 
             Destroy(gameObject, lifeTime);
         }
+
+        private void FixedUpdate()
+        {
+            transform.Translate(Vector3.right * (bulletSpeed * isoFactor * Time.deltaTime), Space.Self);
+        }
+
 
         private void OnCollisionEnter2D(Collision2D other)
         {
@@ -32,12 +53,19 @@ namespace Enemy
                     break;
             }
 
+            Destroy(gameObject);
+
             vignette.active = true;
+            StartCoroutine(DisableVFXAfterDelay(0.1f));
 
             if (hitSound)
                 AudioSource.PlayClipAtPoint(hitSound, transform.position);
+        }
 
-            Destroy(gameObject);
+        IEnumerator DisableVFXAfterDelay(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            vignette.active = false;
         }
     }
 }

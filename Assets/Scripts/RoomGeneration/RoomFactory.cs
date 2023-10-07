@@ -10,7 +10,7 @@ namespace RoomGeneration
     public static class RoomFactory
     {
         public static Room CreateRoom(Transform levelRoot, RoomSettings settings) {
-            var room = new Room(levelRoot);
+            var room = new Room(levelRoot, null);
 
             PopulateRoom(room, settings.TotalEnemyScore, settings.MaximalEnemyBatchScore, RoomObject.Enemies);
             PopulateRoom(room, settings.TotalObstacleScore, settings.MaximalObstacleBatchScore, new RoomObject[] { });

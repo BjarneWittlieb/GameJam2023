@@ -64,6 +64,8 @@ namespace Enemy
 
             if (health <= 0)
             {
+                ProgressionTracking.Instance.KillEnemy();
+
                 Destroy(gameObject);
                 
                 if (deathEffect)

@@ -5,16 +5,22 @@ namespace Player
     public class RangedAttack : MonoBehaviour
     {
         [SerializeField] private GameObject projectile;
-        [SerializeField] private Transform  projectileSpawnPoint;
-        [SerializeField] private float      cooldown;
-        private                  float      cooldownTimer;
-        
+        [SerializeField] private Transform projectileSpawnPoint;
+        [SerializeField] private float cooldown;
+        private float cooldownTimer;
+
         private void Update()
-        { 
+        {
             cooldownTimer -= Time.deltaTime;
-            
-            if(Input.GetKey(KeyCode.Mouse0))
+
+            if (Input.GetKey(KeyCode.Mouse0))
                 FireProjectile();
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(Input.mousePosition, 1f);
         }
 
         private void FireProjectile()
@@ -23,20 +29,15 @@ namespace Player
                 return;
 
             cooldownTimer = cooldown;
-            
+
             var mouseScreenPosition = Input.mousePosition;
-            var mouseWorldPosition  = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
+            var mouseWorldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
 
             var directionToMouse = (Vector2)(mouseWorldPosition - transform.position);
-            var angle            = Mathf.Atan2(directionToMouse.y, directionToMouse.x) * Mathf.Rad2Deg;
-            
-            Instantiate(projectile, projectileSpawnPoint.position, Quaternion.Euler(0f, 0f,  angle));
-        }
+            var angle = Mathf.Atan2(directionToMouse.y, directionToMouse.x) * Mathf.Rad2Deg;
 
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(Input.mousePosition, 1f);
+            Debug.Log("PEW PEW");
+            Instantiate(projectile, projectileSpawnPoint.position, Quaternion.Euler(0f, 0f, angle));
         }
     }
 }
