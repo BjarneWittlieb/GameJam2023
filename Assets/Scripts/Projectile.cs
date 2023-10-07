@@ -40,11 +40,6 @@ public class Projectile : MonoBehaviour
         {
             if(other.gameObject.GetComponent<Enemy.Enemy>().TakeDamage(damage))
                 return; // if enemy is dead
-            //
-            // var targetRigidbody    = other.gameObject.GetComponent<Rigidbody2D>();
-            // Vector3   direction = -other.relativeVelocity.normalized; // Opposite to projectile velocity
-            // other.gameObject.transform.Translate(direction);
-            // targetRigidbody.AddForce(direction * other.relativeVelocity.magnitude * knockback, ForceMode2D.Impulse);
         }
 
         if (hitEffect)
