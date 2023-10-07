@@ -1,50 +1,46 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using System;
 using UnityEngine;
 
 namespace PlayerScripts
 {
-
     public class PlayerHealth : MonoBehaviour
     {
-        public int maxHealth = 4;
-        private int health;
+        public delegate void DeathEvent();
 
         public delegate void HealthChagne(int health, int totalHealth);
-        public static event HealthChagne OnHealthChange;
 
-        public delegate void DeathEvent();
-        public static event DeathEvent OnDeath;
+        public int maxHealth = 4;
+        private DateTime _lastHit;
+        private int health;
 
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
             health = maxHealth;
             if (OnHealthChange != null) OnHealthChange(health, maxHealth);
         }
 
-    
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                ProcessHit(1);
-            }
+            if (Input.GetKeyDown(KeyCode.K)) ProcessHit(1);
         }
+
+        public static event HealthChagne OnHealthChange;
+        public static event DeathEvent OnDeath;
 
         public void ProcessHit(int damage)
         {
+            var timeSinceLastHit = DateTime.Now - _lastHit;
+            const int invulnerabilityCooldownInMS = 200;
+            if (timeSinceLastHit.TotalMilliseconds < invulnerabilityCooldownInMS) return;
             health -= damage;
-            
+            _lastHit = DateTime.Now;
+
             if (OnHealthChange != null) OnHealthChange(health, maxHealth);
 
-            if (health > 0)
-            {
-                return;
-            }
+            if (health > 0) return;
 
             if (OnDeath != null) OnDeath();
         }
