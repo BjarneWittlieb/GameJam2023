@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace UI
@@ -15,8 +16,7 @@ namespace UI
 
         private void TaskOnClick()
         {
-            Debug.Log("You have clicked the button!");
-            // SceneManager.LoadScene("MiCar Scene", LoadSceneMode.Single);
+            SceneManager.LoadScene("MiCar Scene", LoadSceneMode.Single);
         }
     }
 }

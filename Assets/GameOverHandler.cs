@@ -10,6 +10,11 @@ public class GameOverHandler : MonoBehaviour
         PlayerHealth.OnDeath += ShowGameOver;
     }
 
+    private void OnDisable()
+    {
+        PlayerHealth.OnDeath -= ShowGameOver;
+    }
+
 
     private void ShowGameOver()
     {
