@@ -5,9 +5,9 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     [Header("Effects")]
-    [SerializeField] private GameObject hitEffect;
-    [SerializeField] private AudioClip hitSound;
-    [SerializeField] private AudioClip shotSound;
+    [SerializeField] protected GameObject hitEffect;
+    [SerializeField] protected AudioClip hitSound;
+    [SerializeField] protected AudioClip shotSound;
 
     [Header("Info")] [SerializeField] private float bulletSpeed;
 

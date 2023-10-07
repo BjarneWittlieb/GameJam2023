@@ -1,5 +1,6 @@
 using System;
 using PlayerScripts;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,6 +12,8 @@ namespace Enemy
         public  int   damage = 1;
         public float stunTimer;
         public  float stunDuration = 0.2f;
+        
+        [SerializeField] protected GameObject deathEffect;
 
         /// <summary>
         ///     <para>The lower the bigger the recoil of the player. 15 Seems nice</para>
@@ -56,12 +59,15 @@ namespace Enemy
 
         public bool TakeDamage(int amount)
         {
-            Debug.Log("hit");
             health -= amount;
 
             if (health <= 0)
             {
                 Destroy(gameObject);
+                
+                if (deathEffect)
+                    Instantiate(deathEffect, transform.position, quaternion.identity);
+                
                 return true;
             }
             

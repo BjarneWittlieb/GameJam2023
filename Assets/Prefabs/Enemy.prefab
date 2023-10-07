@@ -182,10 +182,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10c719cdbcdc74982bee91f9ea0af674, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
+  health: 3
   damage: 1
   stunTimer: 0
   stunDuration: 0.3
+  deathEffect: {fileID: 6631738932900923114, guid: e72b70b43cbc58d4e89504ce4edacbdc, type: 3}
   recoilDivisor: 15
 --- !u!50 &9047786905503548971
 Rigidbody2D:
