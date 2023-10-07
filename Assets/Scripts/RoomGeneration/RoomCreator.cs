@@ -30,6 +30,11 @@ public class RoomCreator : MonoBehaviour
         DestroyAndBuildRoom();
     }
 
+    public void SpawnRoomItem()
+    {
+        Instantiate(room.RoomReward.GetRewardItem(), transform);
+    }
+
     public void DestroyAndBuildRoom()
     {
         if (room != null)
@@ -45,9 +50,8 @@ public class RoomCreator : MonoBehaviour
         currentDifficulty++;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OpenNextRooms()
     {
-        
+
     }
 }
