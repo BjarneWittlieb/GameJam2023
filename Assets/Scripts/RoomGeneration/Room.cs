@@ -14,10 +14,11 @@ namespace RoomGeneration
 
         public RoomReward RoomReward { get; private set; }
 
-        public Room(Transform levelRoot)
+        public Room(Transform levelRoot, RoomReward reward)
         {
             this.levelRoot = levelRoot;
             objects = new List<RoomObject>();
+            this.RoomReward = reward;
         }
 
         public void AddRoomObject(RoomObject roomObject)
