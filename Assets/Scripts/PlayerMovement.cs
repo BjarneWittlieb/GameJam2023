@@ -30,9 +30,4 @@ public class PlayerMovement : MonoBehaviour
         return Vector2.Scale(new Vector2(x, y).normalized,
             new Vector2(scaleFactor, scaleFactor / RATIO_X_VELOCITY_TO_Y_VELOCITY));
     }
-
-    void LateUpdate()
-    {
-        // transform.rotation = initialRotation;
-    }
 }

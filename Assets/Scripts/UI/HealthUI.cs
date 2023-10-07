@@ -67,7 +67,7 @@ public class HealthUI : MonoBehaviour
                 healthSymbol.changeOpacity(1);
             } else
             {
-                healthSymbol.changeOpacity(0);
+                healthSymbol.changeOpacity(0.1f);
             }
         }
     }
