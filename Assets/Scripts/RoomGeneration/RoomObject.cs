@@ -10,7 +10,11 @@ namespace RoomGeneration
             AllObjects.Enemies.MeleeGroup3Near,
             AllObjects.Enemies.MeleeGroup3Far,
             AllObjects.Enemies.MeleeAloneNear,
-            AllObjects.Enemies.MeleeAloneFar
+            AllObjects.Enemies.MeleeAloneFar,
+            AllObjects.Enemies.RangedAlone,
+            AllObjects.Enemies.RangedGroup,
+            AllObjects.Enemies.RangedBoss,
+            AllObjects.Enemies.AoEAlone
         };
 
         private GameObject addedObject;
@@ -98,6 +102,54 @@ namespace RoomGeneration
                     "EnemyPatterns/MeleeAlone",
                     new Vector2[] { new(-3.81f, -4.85f), new(-10.84f, -1.7f) },
                     2
+                );
+
+                public static RoomObject RangedAlone = new(
+                    "EnemyPatterns/RangeAlone",
+                    new Vector2[]
+                    {
+                        new(5.67f, 4.31f),
+                        new(5.93f, -1.54f),
+                        new(4.01f, 2.93f),
+                        new(.89f, 1.14f)
+                    },
+                    2
+                );
+
+                public static RoomObject RangedGroup = new(
+                    "EnemyPatterns/RangeGroup",
+                    new Vector2[]
+                    {
+                        new(5.67f, 4.31f),
+                        new(5.93f, -1.54f),
+                        new(4.01f, 2.93f),
+                        new(.89f, 1.14f)
+                    },
+                    10
+                );
+
+                public static RoomObject RangedBoss = new(
+                    "EnemyPatterns/RangeHard",
+                    new Vector2[]
+                    {
+                        new(5.67f, 4.31f),
+                        new(5.93f, -1.54f),
+                        new(4.01f, 2.93f),
+                        new(.89f, 1.14f)
+                    },
+                    15
+                );
+
+                public static RoomObject AoEAlone = new(
+                    "EnemyPatterns/AoEAlone",
+                    new Vector2[]
+                    {
+                        new(5.67f, 4.31f),
+                        new(5.93f, -1.54f),
+                        new(4.01f, 2.93f),
+                        new(.89f, 1.14f)
+                    },
+                    7
                 );
             }
 
