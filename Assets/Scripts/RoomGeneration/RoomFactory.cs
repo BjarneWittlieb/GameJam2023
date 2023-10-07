@@ -10,12 +10,17 @@ namespace RoomGeneration
     public static class RoomFactory
     {
         public static Room CreateRoom(Transform levelRoot, RoomSettings settings) {
-            var room = new Room(levelRoot);
+            var room = new Room(levelRoot, GetRoomReward());
 
             PopulateRoom(room, settings.TotalEnemyScore, settings.MaximalEnemyBatchScore, RoomObject.Enemies);
             PopulateRoom(room, settings.TotalObstacleScore, settings.MaximalObstacleBatchScore, new RoomObject[] { });
 
             return room;
+        }
+
+        private static RoomReward GetRoomReward()
+        {
+            return RoomReward.Rewards.ElementAt(UnityEngine.Random.Range(0, RoomReward.Rewards.Length));
         }
 
         private static void PopulateRoom(Room room, int maximumScore, int maximumBatchScore, RoomObject[] ojbects)

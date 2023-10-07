@@ -286,7 +286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b66bc885d31428ba46bd3d52eaf2519, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 583958488102015891, guid: 2bd4d032fab8c814fa8fff4dc566cd9c, type: 3}
+  projectile: {fileID: 4463007139195918617, guid: 6bf52f1331b75ca478f4b29d4f9ac62b, type: 3}
   projectileSpawnPoint: {fileID: 6796144323907665391}
   cooldown: 0.2
 --- !u!1 &8711620313018611838

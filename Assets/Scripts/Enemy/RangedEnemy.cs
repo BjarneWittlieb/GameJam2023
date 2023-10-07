@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 namespace Enemy
 {
@@ -7,7 +8,8 @@ namespace Enemy
     {
         public float fireRate = 900f;
         public int rangedDamage = 1;
-        [SerializeField] private GameObject projectile;
+        public PostProcessVolume fxVolume;
+        [SerializeField] private Projectile projectile;
         [SerializeField] private Transform projectileSpawnPoint;
 
         private DateTime _nextFire = DateTime.Now;
@@ -18,6 +20,7 @@ namespace Enemy
         private void Start()
         {
             _player = GameObject.Find("Player");
+            projectile.fxVolume = fxVolume;
         }
 
 

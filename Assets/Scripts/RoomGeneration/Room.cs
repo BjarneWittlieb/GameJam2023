@@ -1,49 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace RoomGeneration
 {
     public class Room
     {
-        private List<RoomObject> objects;
-        private Transform levelRoot;
+        private readonly Transform levelRoot;
+        private readonly List<RoomObject> objects;
 
-        public Room(Transform levelRoot)
+        public Room(Transform levelRoot, RoomReward reward)
         {
             this.levelRoot = levelRoot;
             objects = new List<RoomObject>();
+            RoomReward = reward;
         }
+
+        public RoomReward RoomReward { get; private set; }
 
         public void AddRoomObject(RoomObject roomObject)
         {
             objects.Add(roomObject);
         }
 
-        public virtual void PopulateAgents() { 
-            foreach (RoomObject roomObject in objects.Where(ro => ro.Type == RoomObjectType.Agent)) 
+        public virtual void PopulateEnemies()
+        {
+            var enemiesCount = 0;
+            foreach (var roomObject in objects.Where(ro => ro.Type == RoomObjectType.Enemy))
             {
                 roomObject.AddToScene(levelRoot);
+                enemiesCount += roomObject.ObjectNumber;
             }
+
+            ProgressionTracking.Instance.ResetEnemyCountTo(enemiesCount);
         }
 
         public virtual void PopulateObstacles()
         {
-            foreach(RoomObject roomObject in objects.Where(ro => ro.Type == RoomObjectType.Obstacle))
-            {
+            foreach (var roomObject in objects.Where(ro => ro.Type == RoomObjectType.Obstacle))
                 roomObject.AddToScene(levelRoot);
-            }
         }
 
         public void DestroyRoom()
         {
-            foreach (var roomObject in objects)
-            {
-                roomObject.RemoveFromScene();
-            }
+            foreach (var roomObject in objects) roomObject.RemoveFromScene();
         }
     }
 }

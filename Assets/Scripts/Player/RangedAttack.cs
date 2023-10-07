@@ -9,6 +9,8 @@ namespace Player
         [SerializeField] private float cooldown;
         private float cooldownTimer;
 
+        public int baseDamage = 10;
+
         private void Update()
         {
             cooldownTimer -= Time.deltaTime;
@@ -36,8 +38,9 @@ namespace Player
             var directionToMouse = (Vector2)(mouseWorldPosition - transform.position);
             var angle = Mathf.Atan2(directionToMouse.y, directionToMouse.x) * Mathf.Rad2Deg;
 
-            Debug.Log("PEW PEW");
-            Instantiate(projectile, projectileSpawnPoint.position, Quaternion.Euler(0f, 0f, angle));
+            Projectile firingProjectile = Instantiate(projectile, projectileSpawnPoint.position, Quaternion.Euler(0f, 0f, angle)).GetComponent<Projectile>();
+            firingProjectile.SetBaseDamage(baseDamage);
+
         }
     }
 }

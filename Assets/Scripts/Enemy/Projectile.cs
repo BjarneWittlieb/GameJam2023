@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Player;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
@@ -7,17 +8,16 @@ namespace Enemy
 {
     public class Projectile : MonoBehaviour
     {
-        [Header("Effects")] [SerializeField] protected GameObject hitEffect;
+        public PostProcessVolume fxVolume;
+        [SerializeField] public int damage;
 
+        [Header("Effects")] [SerializeField] protected GameObject hitEffect;
         [SerializeField] protected AudioClip hitSound;
         [SerializeField] protected AudioClip shotSound;
 
         [Header("Info")] [SerializeField] private float bulletSpeed;
-        public PostProcessVolume fxVolume;
-        [SerializeField] public int damage;
         [SerializeField] private float lifeTime;
         private float isoFactor;
-
         private Vignette vignette;
 
         private void Awake()
@@ -29,6 +29,7 @@ namespace Enemy
         private void Start()
         {
             fxVolume.profile.TryGetSettings(out vignette);
+
             if (shotSound)
                 AudioSource.PlayClipAtPoint(shotSound, transform.position);
 
@@ -55,9 +56,16 @@ namespace Enemy
             Destroy(gameObject);
 
             vignette.active = true;
+            StartCoroutine(DisableVFXAfterDelay(0.1f));
 
             if (hitSound)
                 AudioSource.PlayClipAtPoint(hitSound, transform.position);
+        }
+
+        IEnumerator DisableVFXAfterDelay(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            vignette.active = false;
         }
     }
 }

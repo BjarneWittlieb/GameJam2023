@@ -51,7 +51,7 @@ MonoBehaviour:
   hitSound: {fileID: 0}
   shotSound: {fileID: 0}
   bulletSpeed: 10
-  damage: 4
+  damage: 1
   lifeTime: 4
 --- !u!212 &2950762723439731449
 SpriteRenderer:
@@ -93,7 +93,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 6ae5a1eebebff7c45bef7a05c1809d04, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

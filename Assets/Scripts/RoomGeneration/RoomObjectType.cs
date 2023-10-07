@@ -9,7 +9,7 @@ namespace RoomGeneration
 {
     public enum RoomObjectType
     {
-        Agent,
+        Enemy,
         Obstacle
     }
 }
