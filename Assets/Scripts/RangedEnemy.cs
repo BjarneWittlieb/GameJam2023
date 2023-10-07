@@ -36,10 +36,8 @@ public class RangedEnemy : Enemy.Enemy
         var directionToMouse = (Vector2)(mouseWorldPosition - transform.position);
         var angle = Mathf.Atan2(directionToMouse.y, directionToMouse.x) * Mathf.Rad2Deg;
 
-        Transform projectileSpawnTransform;
-        (projectileSpawnTransform = projectileSpawnPoint.transform).rotation = Quaternion.Euler(0f, 0f, angle);
 
-        var newBullet = Instantiate(projectile, projectileSpawnPoint.position, projectileSpawnTransform.rotation);
+        var newBullet = Instantiate(projectile, projectileSpawnPoint.position, Quaternion.Euler(0f, 0f, angle));
         var enemyProjectile = newBullet.GetComponent<EnemyProjectile>();
         enemyProjectile.damage = rangedDamage;
     }

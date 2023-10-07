@@ -19,9 +19,9 @@ namespace Enemy
 
 
             if (hitEffect)
-                    Instantiate(hitEffect, other.contacts[0].point, quaternion.identity);
-            
-            if (hitSound) 
+                Instantiate(hitEffect, other.contacts[0].point, quaternion.identity);
+
+            if (hitSound)
                 AudioSource.PlayClipAtPoint(hitSound, transform.position);
 
             Destroy(gameObject);
