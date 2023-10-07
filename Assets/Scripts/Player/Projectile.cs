@@ -6,8 +6,8 @@ namespace Player
 {
     public class Projectile : MonoBehaviour
     {
-        [Header("Effects")] [SerializeField] protected GameObject hitEffect;
-
+        [Header("Effects")]
+        [SerializeField] protected GameObject hitEffect;
         [SerializeField] protected AudioClip hitSound;
         [SerializeField] protected AudioClip shotSound;
 
@@ -16,6 +16,10 @@ namespace Player
         [SerializeField] public float damageMultiply;
         [SerializeField] private float lifeTime;
         private float isoFactor;
+
+        private                 Animator animator;
+        private                 bool     pop;
+        private static readonly int      Pop = Animator.StringToHash("pop");
 
         private int baseDamage;
 
@@ -27,31 +31,49 @@ namespace Player
 
         private void Start()
         {
+            animator = GetComponentInChildren<Animator>();
+            
             if (shotSound)
                 AudioSource.PlayClipAtPoint(shotSound, transform.position);
 
-            Destroy(gameObject, lifeTime);
+            Invoke(nameof(DestroyInternal), lifeTime);
         }
 
         private void FixedUpdate()
         {
+            if (pop)
+                return;
+            
             transform.Translate(Vector3.right * (bulletSpeed * isoFactor * Time.deltaTime), Space.Self);
         }
 
         private void OnCollisionEnter2D(Collision2D other)
         {
+            Debug.Log("hit");
+            if (pop)
+                return;
+            
+            DestroyInternal();
+            
             if (other.gameObject.CompareTag("Enemy"))
             {
-                other.gameObject.GetComponent<Enemy.Enemy>().TakeDamage((int) (baseDamage * damageMultiply));
-
-                if (hitEffect)
-                    Instantiate(hitEffect, other.contacts[0].point, quaternion.identity);
-
-                if (hitSound)
-                    AudioSource.PlayClipAtPoint(hitSound, transform.position);
+                other.gameObject.GetComponent<Enemy.Enemy>().TakeDamage(damage);
             }
 
-            Destroy(gameObject);
+            if (hitEffect)
+                Instantiate(hitEffect, other.contacts[0].point, quaternion.identity);
+
+            if (hitSound)
+                AudioSource.PlayClipAtPoint(hitSound, transform.position);
+        }
+
+        private void DestroyInternal()
+        {
+            pop = true;
+            animator.SetBool(Pop, pop);
+            var stateInfo     = animator.GetCurrentAnimatorStateInfo(0);
+            var remainingTime = stateInfo.length - stateInfo.normalizedTime * stateInfo.length;
+            Destroy(gameObject, remainingTime);
         }
 
         public void SetBaseDamage(int baseDamage)

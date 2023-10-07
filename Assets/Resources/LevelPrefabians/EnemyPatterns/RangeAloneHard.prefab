@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6500844220288135607}
   m_Layer: 0
-  m_Name: RangeAlone
+  m_Name: RangeAloneHard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,6 +40,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6500844220288135607}
     m_Modifications:
+    - target: {fileID: -8886734721682833, guid: 687adbf8eb72c4bc39a2d2155cf87e07, type: 3}
+      propertyPath: damage
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8886734721682833, guid: 687adbf8eb72c4bc39a2d2155cf87e07, type: 3}
+      propertyPath: health
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: -8886734721682833, guid: 687adbf8eb72c4bc39a2d2155cf87e07, type: 3}
+      propertyPath: fireRate
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: -8886734721682833, guid: 687adbf8eb72c4bc39a2d2155cf87e07, type: 3}
+      propertyPath: stunDuration
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2696966014657611630, guid: 687adbf8eb72c4bc39a2d2155cf87e07, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2696966014657611630, guid: 687adbf8eb72c4bc39a2d2155cf87e07, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2696966014657611630, guid: 687adbf8eb72c4bc39a2d2155cf87e07, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5
