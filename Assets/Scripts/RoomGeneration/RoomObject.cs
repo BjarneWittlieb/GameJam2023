@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Util.RoomGeneration
+namespace RoomGeneration
 {
     public class RoomObject
     {
