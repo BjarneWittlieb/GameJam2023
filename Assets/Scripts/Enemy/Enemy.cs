@@ -13,6 +13,8 @@ namespace Enemy
         public float stunTimer;
         public float stunDuration = 0.2f;
 
+        private bool isDead = false;
+
         [SerializeField] protected GameObject deathEffect;
 
         protected Animator[] animators;
@@ -48,6 +50,7 @@ namespace Enemy
 
         private void ProcessHit(Collision2D other)
         {
+            if (isDead) return;
             if (other.gameObject.name != playerName) return;
             var enemyVelocity = gameObject.GetComponent<NavMeshAgent>().velocity.normalized / recoilDivisor;
             other.rigidbody.AddForce(enemyVelocity, ForceMode2D.Force);
@@ -80,6 +83,7 @@ namespace Enemy
 
                 AnimateDie();
                 OnDeath();
+                isDead = true;
                 // Destroy with delay
                 Destroy(gameObject, 1.5f);
                 
