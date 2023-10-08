@@ -9,7 +9,8 @@ namespace Player
         [SerializeField] private float cooldown;
         private float cooldownTimer;
 
-        public int baseDamage = 10;
+        public int fireBaseDamage = 10;
+        public int bubbleBaseDamage = 10;
 
         private void Update()
         {
@@ -39,8 +40,15 @@ namespace Player
             var angle = Mathf.Atan2(directionToMouse.y, directionToMouse.x) * Mathf.Rad2Deg;
 
             Projectile firingProjectile = Instantiate(projectile, projectileSpawnPoint.position, Quaternion.Euler(0f, 0f, angle)).GetComponent<Projectile>();
-            firingProjectile.SetBaseDamage(baseDamage);
+            
 
+            firingProjectile.SetBaseDamage(getCurrentBaseDamage());
+
+        }
+
+        private int getCurrentBaseDamage()
+        {
+            return ProgressionTracking.Instance.CurrentRoom.IsGood ? fireBaseDamage : bubbleBaseDamage;
         }
     }
 }

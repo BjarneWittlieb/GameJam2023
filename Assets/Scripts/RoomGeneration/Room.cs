@@ -35,6 +35,7 @@ namespace RoomGeneration
             }
 
             ProgressionTracking.Instance.ResetEnemyCountTo(enemiesCount);
+            ProgressionTracking.Instance.SetCurrentRoom(this);
         }
 
         public virtual void PopulateObstacles()

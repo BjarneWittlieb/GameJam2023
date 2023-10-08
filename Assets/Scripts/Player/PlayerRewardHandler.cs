@@ -21,9 +21,14 @@ namespace Assets.Scripts.Player
             playerHealth = GetComponent<Health>();
         }
 
-        public void AddDamageReward()
+        public void AddBubbleDamageReward()
         {
-            playerAttack.baseDamage += 1;
+            playerAttack.bubbleBaseDamage += 1;
+        }
+
+        public void AddFireDamageReward()
+        {
+            playerAttack.fireBaseDamage += 1;
         }
 
         public void AddHealthReward() {
@@ -31,8 +36,8 @@ namespace Assets.Scripts.Player
             
         }
 
-        public void AddSpeedReward(int strength) { 
-            
+        public void AddSpeedReward() {
+            playerMovement.speedMod += .1f;
         }
 
         public void AddLifeRegReward(int strength) { 
