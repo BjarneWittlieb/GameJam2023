@@ -9,6 +9,8 @@ namespace Player
 
         public delegate void HealthChange(int health, int totalHealth);
 
+        public delegate void PlayerHitEvent();
+
         public int maxHealth = 4;
         private DateTime _lastHit;
         private int health;
@@ -29,6 +31,7 @@ namespace Player
 
         public static event HealthChange OnHealthChange;
         public static event DeathEvent OnDeath;
+        public static event PlayerHitEvent OnPlayerHit;
 
         public void ProcessHit(int damage)
         {
@@ -37,6 +40,8 @@ namespace Player
             if (timeSinceLastHit.TotalMilliseconds < invulnerabilityCooldownInMS) return;
             health -= damage;
             _lastHit = DateTime.Now;
+
+            if (OnPlayerHit != null) OnPlayerHit();
 
             if (OnHealthChange != null) OnHealthChange(health, maxHealth);
 

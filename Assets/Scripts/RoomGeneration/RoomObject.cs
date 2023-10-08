@@ -125,7 +125,8 @@ namespace RoomGeneration
                         new(4.01f, 2.93f),
                         new(.89f, 1.14f)
                     },
-                    10
+                    10,
+                    objectNumber: 3
                 );
 
                 public static RoomObject RangedBoss = new(
@@ -137,7 +138,9 @@ namespace RoomGeneration
                         new(4.01f, 2.93f),
                         new(.89f, 1.14f)
                     },
-                    15
+                    15,
+                    RoomObjectType.Enemy,
+                    1
                 );
 
                 public static RoomObject AoEAlone = new(

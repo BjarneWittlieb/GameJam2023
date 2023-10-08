@@ -9,6 +9,8 @@ namespace RoomGeneration
         private readonly Transform levelRoot;
         private readonly List<RoomObject> objects;
 
+        public bool IsGood { get => RoomReward.IsGood;  }
+
         public Room(Transform levelRoot, RoomReward reward)
         {
             this.levelRoot = levelRoot;
