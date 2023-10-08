@@ -15,7 +15,7 @@ namespace Player.Attacks
             cooldownTimer -= Time.deltaTime;
         }
 
-        protected abstract void FireInternal(int baseDamage);
+        protected abstract void FireInternal(int damage);
 
         // ReSharper disable Unity.PerformanceAnalysis
         public void Fire(int baseDamage)
