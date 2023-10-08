@@ -332,7 +332,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 7387340033206893409, guid: 31c018ac996fba3439bbe08d9c6e6c45, type: 3}
   projectileSpawnPoint: {fileID: 6796144323907665391}
-  cooldown: 1.5
+  cooldown: 0.2
 --- !u!1 &8711620313018611838
 GameObject:
   m_ObjectHideFlags: 0
