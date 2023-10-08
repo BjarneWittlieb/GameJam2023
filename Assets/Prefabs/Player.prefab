@@ -251,7 +251,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 7387340033206893409, guid: 31c018ac996fba3439bbe08d9c6e6c45, type: 3}
   projectileSpawnPoint: {fileID: 6796144323907665391}
-  cooldown: 1.5
+  cooldown: 1.2
   shotDelay: 0.18
   fireball2: {fileID: 6605740908418643374, guid: ef8bb96206a876245902d304e2cd905c, type: 3}
   fireball3: {fileID: 7321237464136867491, guid: bb1500f4ad1a68741961327fb818867f, type: 3}
