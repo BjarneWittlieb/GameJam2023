@@ -11,13 +11,13 @@ namespace Assets.Scripts.Player
     public class PlayerRewardHandler: MonoBehaviour
     {
         PlayerMovement playerMovement;
-        RangedAttack playerAttack;
+        BubbleAttack playerAttack;
         Health playerHealth;
 
         public void Start()
         {
             playerMovement = GetComponent<PlayerMovement>();
-            playerAttack = GetComponentInChildren<RangedAttack>();
+            playerAttack = GetComponentInChildren<BubbleAttack>();
             playerHealth = GetComponent<Health>();
         }
 

@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using Player.Projectiles;
+using UnityEngine;
 
 namespace Player
 {
-    public class RangedAttack : MonoBehaviour
+    public class BubbleAttack : MonoBehaviour
     {
         [SerializeField] private GameObject projectile;
         [SerializeField] private Transform projectileSpawnPoint;
@@ -26,6 +27,7 @@ namespace Player
             Gizmos.DrawWireSphere(Input.mousePosition, 1f);
         }
 
+        // ReSharper disable Unity.PerformanceAnalysis
         private void FireProjectile()
         {
             if (cooldownTimer > 0)

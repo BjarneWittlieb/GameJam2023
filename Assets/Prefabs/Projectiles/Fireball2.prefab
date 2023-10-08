@@ -115,7 +115,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2334922067911687863}
-  - component: {fileID: 6107246272147173259}
+  - component: {fileID: 4964490319386940303}
   - component: {fileID: 3036614863120553940}
   - component: {fileID: 2986674293390385807}
   m_Layer: 3
@@ -141,7 +141,7 @@ Transform:
   - {fileID: 8358850282326825310}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6107246272147173259
+--- !u!114 &4964490319386940303
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -150,14 +150,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 6605740908418643374}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbc6e4f00e54f4b6eb08520ea40b5f02, type: 3}
+  m_Script: {fileID: 11500000, guid: f301b1ae4df04a9eb5b32eb476bab8e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hitEffect: {fileID: 0}
   hitSound: {fileID: 0}
   shotSound: {fileID: 0}
-  bulletSpeed: 7
-  damage: 2
+  speed: 7
+  damageMultiply: 1.5
   lifeTime: 4
 --- !u!58 &3036614863120553940
 CircleCollider2D:
@@ -191,7 +191,7 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.013205871, y: 0}
+  m_Offset: {x: -0.15, y: 0}
   serializedVersion: 2
   m_Radius: 0.18679412
 --- !u!50 &2986674293390385807
