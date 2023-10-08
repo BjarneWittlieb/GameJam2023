@@ -147,6 +147,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3604859468162674824}
   - component: {fileID: 6751937767866250361}
+  - component: {fileID: 8295323693355854040}
   m_Layer: 0
   m_Name: Raum
   m_TagString: Untagged
@@ -172,6 +173,7 @@ Transform:
   - {fileID: 1518551615084962817}
   - {fileID: 8304327030096938411}
   - {fileID: 4107439400678403581}
+  - {fileID: 4566696828478708573}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6751937767866250361
@@ -190,6 +192,18 @@ MonoBehaviour:
   startingDifficulty: 1
   levelDoor1: {fileID: 5132820077972767954}
   levelDoor2: {fileID: 3042086815908509728}
+--- !u!114 &8295323693355854040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3919611715052174152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 153aeb68281bb49169232c02d86f7b2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4099853143911671407
 GameObject:
   m_ObjectHideFlags: 0

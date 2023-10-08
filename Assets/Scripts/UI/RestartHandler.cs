@@ -16,7 +16,7 @@ namespace UI
 
         private void TaskOnClick()
         {
-            SceneManager.LoadScene("MiCar Scene", LoadSceneMode.Single);
+            SceneManager.LoadScene("Bjarne Scene", LoadSceneMode.Single);
         }
     }
 }
