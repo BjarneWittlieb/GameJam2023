@@ -28,16 +28,16 @@ namespace Enemy
         protected void Start()
         {
             animators = GetComponentsInChildren<Animator>() ?? new Animator[] { };
+            animators = GetComponentsInChildren<Animator>() ?? new Animator[] { };
+
+            if (animators?.Length < 2) return;
+
+            animators[0].gameObject.SetActive(ProgressionTracking.Instance.CurrentRoom.IsGood);
+            animators[1].gameObject.SetActive(!ProgressionTracking.Instance.CurrentRoom.IsGood);
         }
 
         protected virtual void Update()
         {
-            animators = GetComponentsInChildren<Animator>() ?? new Animator[] {};
-
-            if (animators?.Length < 2) return; 
-
-            animators[0].gameObject.SetActive(ProgressionTracking.Instance.CurrentRoom.IsGood);
-            animators[1].gameObject.SetActive(!ProgressionTracking.Instance.CurrentRoom.IsGood);
             stunTimer -= Time.deltaTime;
         }
 

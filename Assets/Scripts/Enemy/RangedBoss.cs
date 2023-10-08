@@ -24,6 +24,7 @@ namespace Enemy
         // Start is called before the first frame update
         private void Start()
         {
+            base.Start();
             _player = GameObject.Find("Player");
             projectile.fxVolume = fxVolume;
         }

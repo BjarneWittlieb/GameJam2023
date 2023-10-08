@@ -18,6 +18,7 @@ public class AoEEnemy : Enemy.Enemy
     // Start is called before the first frame update
     private void Start()
     {
+        base.Start();
         _player = GameObject.Find("Player");
         _rnd = new Random();
         _aoeSpawnCounter = 0;
