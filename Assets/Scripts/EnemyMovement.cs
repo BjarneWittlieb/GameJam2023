@@ -1,3 +1,4 @@
+using Enemy;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -31,7 +32,7 @@ public class EnemyMovement : MonoBehaviour
     private void Update()
     {
         if (_enemy.isDead) return;
-
+        _enemy.stunTimer -= Time.deltaTime;
 
         _agent.SetDestination(player.transform.position);
         if (_enemy.stunTimer <= 0 && (_agent.remainingDistance < aggroRadius || aggroRadius == 0f || hasAggro))
