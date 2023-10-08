@@ -28,7 +28,8 @@ namespace Enemy
 
         private void Start()
         {
-            fxVolume.profile.TryGetSettings(out vignette);
+            if (fxVolume && fxVolume.profile)
+                fxVolume.profile.TryGetSettings(out vignette);
 
             if (shotSound)
                 AudioSource.PlayClipAtPoint(shotSound, transform.position);
@@ -48,6 +49,8 @@ namespace Enemy
             {
                 case "Ranged Enemy":
                     return;
+                case "Enemy Projectile(Clone)":
+                    return;
                 case "Player":
                     other.gameObject.GetComponent<Health>().ProcessHit(damage);
                     break;
@@ -55,14 +58,14 @@ namespace Enemy
 
             Destroy(gameObject);
 
-            vignette.active = true;
+            if (vignette) vignette.active = true;
             StartCoroutine(DisableVFXAfterDelay(0.1f));
 
             if (hitSound)
                 AudioSource.PlayClipAtPoint(hitSound, transform.position);
         }
 
-        IEnumerator DisableVFXAfterDelay(float delay)
+        private IEnumerator DisableVFXAfterDelay(float delay)
         {
             yield return new WaitForSeconds(delay);
             vignette.active = false;
