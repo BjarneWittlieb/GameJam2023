@@ -85,7 +85,7 @@ namespace RoomGeneration
             {
                 public static RoomObject MeleeGroup3Far = new(
                     "EnemyPatterns/MeleeGroup3",
-                    new Vector2[] { new(1.14f, .58f), new(5.57f, -5.25f) },
+                    new Vector2[] { new(3.14f, .58f), new(5.57f, -5.25f) },
                     6, objectNumber: 3
                 );
 
@@ -109,7 +109,7 @@ namespace RoomGeneration
 
                 public static RoomObject MeleeAloneNear = new(
                     "EnemyPatterns/MeleeAlone",
-                    new Vector2[] { new(-3.81f, -4.85f), new(-10.84f, -1.7f) },
+                    new Vector2[] { new(-1.81f, -4.85f), new(-10.84f, -1.7f) },
                     2
                 );
 
@@ -120,7 +120,7 @@ namespace RoomGeneration
                         new(5.67f, 4.31f),
                         new(5.93f, -1.54f),
                         new(4.01f, 2.93f),
-                        new(.89f, 1.14f)
+                        new(3.1f, 1.14f)
                     },
                     2
                 );
@@ -132,7 +132,7 @@ namespace RoomGeneration
                         new(5.67f, 4.31f),
                         new(5.93f, -1.54f),
                         new(4.01f, 2.93f),
-                        new(.89f, 1.14f)
+                        new(4.2f, 1.14f)
                     },
                     10,
                     objectNumber: 3
@@ -145,7 +145,7 @@ namespace RoomGeneration
                         new(5.67f, 4.31f),
                         new(5.93f, -1.54f),
                         new(4.01f, 2.93f),
-                        new(.89f, 1.14f)
+                        new(4.0f, 1.14f)
                     },
                     15
                 );
@@ -156,8 +156,7 @@ namespace RoomGeneration
                     {
                         new(5.67f, 4.31f),
                         new(5.93f, -1.54f),
-                        new(4.01f, 2.93f),
-                        new(.89f, 1.14f)
+                        new(4.01f, 2.93f)
                     },
                     7
                 );

@@ -1,5 +1,4 @@
 using Player;
-using System.Threading;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AI;
@@ -17,23 +16,25 @@ namespace Enemy
 
         [SerializeField] protected GameObject deathEffect;
 
-        protected Animator[] animators;
-
         /// <summary>
         ///     <para>The lower the bigger the recoil of the player. 15 Seems nice</para>
         /// </summary>
         public int recoilDivisor = 15;
 
         private readonly string playerName = "Player";
+
+        protected Animator[] animators;
         protected float AttackDistance;
+
+        private bool isDead;
         protected float MovementSpeed;
 
-        protected virtual void Update()
+        protected void Start()
         {
-            stunTimer -= Time.deltaTime;
+            animators = GetComponentsInChildren<Animator>() ?? new Animator[] { };
         }
 
-        protected void Start()
+        protected virtual void Update()
         {
             animators = GetComponentsInChildren<Animator>() ?? new Animator[] {};
 
@@ -41,6 +42,7 @@ namespace Enemy
 
             animators[0].gameObject.SetActive(ProgressionTracking.Instance.CurrentRoom.IsGood);
             animators[1].gameObject.SetActive(!ProgressionTracking.Instance.CurrentRoom.IsGood);
+            stunTimer -= Time.deltaTime;
         }
 
         protected void OnCollisionEnter2D(Collision2D other)
@@ -77,7 +79,6 @@ namespace Enemy
         }
 
 
-
         public bool TakeDamage(int amount)
         {
             if (isDead) return false;
@@ -87,7 +88,7 @@ namespace Enemy
             if (health <= 0)
             {
                 ProgressionTracking.Instance.KillEnemy();
-
+                isDead = true;
                 AnimateDie();
                 OnDeath();
 
@@ -99,10 +100,9 @@ namespace Enemy
                     Instantiate(deathEffect, transform.position, quaternion.identity);
 
                 return true;
-            } else
-            {
-                AnimateHit();
             }
+
+            AnimateHit();
 
             stunTimer = stunDuration;
             return false;
@@ -110,16 +110,13 @@ namespace Enemy
 
         private void setHittingAnimationFalse()
         {
-            foreach (var animator in animators)
-            {
-                animator.SetBool("hitting", false);
-            }
+            foreach (var animator in animators) animator.SetBool("hitting", false);
         }
 
         private void AnimateHit()
         {
             if (animators == null) return;
-            foreach(var animator in animators)
+            foreach (var animator in animators)
             {
                 animator.SetBool("hitting", true);
                 Invoke(nameof(setHittingAnimationFalse), .2f);
