@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitEffect: {fileID: 0}
   hitSound: {fileID: 0}
-  shotSound: {fileID: 0}
+  shotSound: {fileID: 8300000, guid: 4b839a560fc794410ac3f3f49b3b28e8, type: 3}
   speed: 10
   damageMultiply: 1
   lifeTime: 4
