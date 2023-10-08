@@ -1,15 +1,14 @@
+using Player.Projectiles;
 using UnityEngine;
 
 namespace Player.Attacks
 {
     public class FireballAttack : AttackBase
     {
-        private float cooldownTimer;
-
-        [SerializeField] protected float      shotDelay = .33f;
+        [SerializeField] protected float shotDelay = .33f;
         [SerializeField] protected GameObject fireball2;
         [SerializeField] protected GameObject fireball3;
-        private                    int        baseDamage;
+        private int baseDamage;
 
         protected override void FireInternal(int damage)
         {
@@ -21,8 +20,9 @@ namespace Player.Attacks
 
         private void Fireball(GameObject fireball)
         {
-            var angle            = GetTargetAngle();
-            var firingProjectile = Instantiate(fireball, projectileSpawnPoint.position, Quaternion.Euler(0f, 0f, angle)).GetComponent<Projectiles.Projectile>();
+            var angle = GetTargetAngle();
+            var firingProjectile = Instantiate(fireball, projectileSpawnPoint.position, Quaternion.Euler(0f, 0f, angle))
+                .GetComponent<Projectile>();
             firingProjectile.SetBaseDamage(baseDamage);
         }
 
@@ -30,12 +30,12 @@ namespace Player.Attacks
         {
             Fireball(projectile);
         }
-        
+
         private void Fireball2()
         {
             Fireball(fireball2);
         }
-        
+
         private void Fireball3()
         {
             Fireball(fireball3);
