@@ -1,34 +1,30 @@
 ﻿using Player;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Player.Attacks;
 using UnityEngine;
 
 namespace Assets.Scripts.Player
 {
     public class PlayerRewardHandler: MonoBehaviour
     {
-        PlayerMovement playerMovement;
-        BubbleAttack playerAttack;
-        Health playerHealth;
+        PlayerMovement   playerMovement;
+        AttackController playerAttack;
+        Health           playerHealth;
 
         public void Start()
         {
             playerMovement = GetComponent<PlayerMovement>();
-            playerAttack = GetComponentInChildren<BubbleAttack>();
+            playerAttack = GetComponentInChildren<AttackController>();
             playerHealth = GetComponent<Health>();
         }
 
         public void AddBubbleDamageReward()
         {
-            playerAttack.bubbleBaseDamage += 2;
+            playerAttack.BubbleBaseDamage += 2;
         }
 
         public void AddFireDamageReward()
         {
-            playerAttack.fireBaseDamage += 2;
+            playerAttack.FireBaseDamage += 2;
         }
 
         public void AddHealthReward() {
