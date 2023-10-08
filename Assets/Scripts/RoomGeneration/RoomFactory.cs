@@ -5,12 +5,14 @@ namespace RoomGeneration
 {
     public static class RoomFactory
     {
-        public static Room CreateRoom(Transform levelRoot, RoomSettings settings)
+        public static Room CreateRoom(Transform levelRoot, RoomSettings settings, bool withBoss = false)
         {
             var room = new Room(levelRoot, GetRoomReward());
 
             PopulateRoom(room, settings.TotalEnemyScore, settings.MaximalEnemyBatchScore, RoomObject.Enemies);
             PopulateRoom(room, settings.TotalObstacleScore, settings.MaximalObstacleBatchScore, RoomObject.Obstacles);
+
+            if (withBoss) room.AddRoomObject(RoomObject.Boss);
 
             return room;
         }

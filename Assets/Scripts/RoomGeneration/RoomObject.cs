@@ -13,7 +13,6 @@ namespace RoomGeneration
             AllObjects.Enemies.MeleeAloneFar,
             AllObjects.Enemies.RangedAlone,
             AllObjects.Enemies.RangedGroup,
-            AllObjects.Enemies.RangedBoss,
             AllObjects.Enemies.AoEAlone
         };
 
@@ -21,6 +20,9 @@ namespace RoomGeneration
         {
             AllObjects.Obstacles.Obstacle
         };
+
+        public static RoomObject Boss = new(
+            "EnemyPatterns/Boss", new Vector2(1f, 1f), 10);
 
         private GameObject addedObject;
 
@@ -31,6 +33,7 @@ namespace RoomGeneration
             PrefabPath = path;
             positions = new[] { position };
             DifficultyScore = difficulty;
+            ObjectNumber = 1;
         }
 
         public RoomObject(string path, Vector2[] positions, int difficulty = 0,

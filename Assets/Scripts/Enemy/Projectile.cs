@@ -51,6 +51,8 @@ namespace Enemy
                     return;
                 case "Enemy Projectile(Clone)":
                     return;
+                case "Ranged Boss Variant":
+                    return;
                 case "Player":
                     other.gameObject.GetComponent<Health>().ProcessHit(damage);
                     break;
