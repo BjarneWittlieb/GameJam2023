@@ -1,13 +1,13 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace Player
 {
-    public class RangedAttack : MonoBehaviour
+    public class FireballAttack : MonoBehaviour
     {
         [SerializeField] private GameObject projectile;
-        [SerializeField] private Transform projectileSpawnPoint;
-        [SerializeField] private float cooldown;
-        private float cooldownTimer;
+        [SerializeField] private Transform  projectileSpawnPoint;
+        [SerializeField] private float      cooldown;
+        private                  float      cooldownTimer;
 
         public int baseDamage = 10;
 
@@ -25,6 +25,7 @@ namespace Player
             Gizmos.DrawWireSphere(Input.mousePosition, 1f);
         }
 
+        // ReSharper disable Unity.PerformanceAnalysis
         private void FireProjectile()
         {
             if (cooldownTimer > 0)
@@ -33,12 +34,12 @@ namespace Player
             cooldownTimer = cooldown;
 
             var mouseScreenPosition = Input.mousePosition;
-            var mouseWorldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
+            var mouseWorldPosition  = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
 
             var directionToMouse = (Vector2)(mouseWorldPosition - transform.position);
-            var angle = Mathf.Atan2(directionToMouse.y, directionToMouse.x) * Mathf.Rad2Deg;
+            var angle            = Mathf.Atan2(directionToMouse.y, directionToMouse.x) * Mathf.Rad2Deg;
 
-            Projectiles.Projectile firingProjectile = Instantiate(projectile, projectileSpawnPoint.position, Quaternion.Euler(0f, 0f, angle)).GetComponent<Projectiles.Projectile>();
+            var firingProjectile = Instantiate(projectile, projectileSpawnPoint.position, Quaternion.Euler(0f, 0f, angle)).GetComponent<Projectiles.Projectile>();
             firingProjectile.SetBaseDamage(baseDamage);
 
         }
