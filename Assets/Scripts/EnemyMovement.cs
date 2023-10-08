@@ -30,6 +30,9 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame  
     private void Update()
     {
+        if (_enemy.isDead) return;
+
+
         _agent.SetDestination(player.transform.position);
         if (_enemy.stunTimer <= 0 && (_agent.remainingDistance < aggroRadius || aggroRadius == 0f || hasAggro))
         {

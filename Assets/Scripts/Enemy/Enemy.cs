@@ -12,6 +12,8 @@ namespace Enemy
         public float stunTimer;
         public float stunDuration = 0.2f;
 
+        public bool isDead = false;
+
         [SerializeField] protected GameObject deathEffect;
 
         /// <summary>
@@ -24,7 +26,6 @@ namespace Enemy
         protected Animator[] animators;
         protected float AttackDistance;
 
-        private bool isDead;
         protected float MovementSpeed;
 
         protected void Start()
@@ -34,6 +35,12 @@ namespace Enemy
 
         protected virtual void Update()
         {
+            animators = GetComponentsInChildren<Animator>() ?? new Animator[] {};
+
+            if (animators?.Length < 2) return; 
+
+            animators[0].gameObject.SetActive(ProgressionTracking.Instance.CurrentRoom.IsGood);
+            animators[1].gameObject.SetActive(!ProgressionTracking.Instance.CurrentRoom.IsGood);
             stunTimer -= Time.deltaTime;
         }
 
@@ -73,7 +80,8 @@ namespace Enemy
 
         public bool TakeDamage(int amount)
         {
-            if (isDead) return true;
+            if (isDead) return false;
+
             health -= amount;
 
             if (health <= 0)
@@ -82,10 +90,11 @@ namespace Enemy
                 isDead = true;
                 AnimateDie();
                 OnDeath();
+
                 isDead = true;
                 // Destroy with delay
-                Destroy(gameObject, 1.5f);
-
+                Destroy(gameObject, .7f);
+                
                 if (deathEffect)
                     Instantiate(deathEffect, transform.position, quaternion.identity);
 
@@ -116,7 +125,19 @@ namespace Enemy
         private void AnimateDie()
         {
             if (animators == null) return;
-            foreach (var animator in animators) animator.SetBool("dying", true);
+            foreach (var animator in animators)
+            {
+                animator.SetBool("dying", true);
+                Invoke(nameof(stopHit), .2f);
+            }
+        }
+
+        void stopHit()
+        {
+            foreach (var animator in animators)
+            {
+                animator.SetBool("dying", false);
+            }
         }
     }
 }
