@@ -6,15 +6,15 @@ public class RoomCreator : MonoBehaviour
 {
     public NavMeshSurface navMesh;
     public float startingDifficulty = 1f;
+
+    public LevelDoor levelDoor1;
+    public LevelDoor levelDoor2;
     private float currentDifficulty;
 
     private GameObject player;
     private Vector3 playerStartPos;
 
     private Room room;
-
-    public LevelDoor levelDoor1;
-    public LevelDoor levelDoor2;
 
     // Start is called before the first frame update
     private void Start()
@@ -36,7 +36,7 @@ public class RoomCreator : MonoBehaviour
 
     private Room GetRoom()
     {
-        return RoomFactory.CreateRoom(this.transform, new RoomSettings((int)currentDifficulty));
+        return RoomFactory.CreateRoom(transform, new RoomSettings((int)currentDifficulty));
     }
 
     public void DestroyAndBuildRoom(Room newRoom)
@@ -45,11 +45,7 @@ public class RoomCreator : MonoBehaviour
         room = RoomFactory.CreateRoom(transform, new RoomSettings((int)currentDifficulty));
 
         room.PopulateObstacles();
-        Physics2D.SyncTransforms();
         navMesh.BuildNavMesh();
-        navMesh.BuildNavMeshAsync();
-
-        //collectSources2d.room;
         room.PopulateEnemies();
 
         player.transform.position = playerStartPos;
