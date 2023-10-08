@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 using Random = System.Random;
 
@@ -8,10 +9,10 @@ public class AoEEnemy : Enemy.Enemy
     public int rangedDamage = 1;
     public int randomAimFactor = 10;
     [SerializeField] private GameObject projectile;
-    
+    private int _aoeSpawnCounter;
+
     private DateTime _nextFire = DateTime.Now;
     private GameObject _player;
-    private int _aoeSpawnCounter;
     private Random _rnd;
 
     // Start is called before the first frame update
@@ -35,6 +36,13 @@ public class AoEEnemy : Enemy.Enemy
     private void SpawnAoE()
     {
         Vector3 aimPosition = GetAimPosition();
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(new Vector2(aimPosition.x, aimPosition.y), 0.1f);
+
+        while (hitColliders.Length > 0)
+        {
+            aimPosition = GetAimPosition();
+            hitColliders = Physics2D.OverlapCircleAll(new Vector2(aimPosition.x, aimPosition.y), 0.1f);
+        }
 
         var newBullet = Instantiate(projectile, aimPosition, Quaternion.Euler(0f, 0f, 0f));
 
@@ -47,6 +55,6 @@ public class AoEEnemy : Enemy.Enemy
 
     private Vector3 GetAimPosition()
     {
-        return _player.transform.position + new Vector3((float)(_rnd.NextDouble() - 0.5), (float)(_rnd.NextDouble() - 0.5), 0) * randomAimFactor * (float)(_rnd.NextDouble() / (Math.Sqrt(1 + _aoeSpawnCounter % 3)));
+        return AoEAttack.GetAimPosition(_player.transform.position, randomAimFactor, _aoeSpawnCounter);
     }
 }

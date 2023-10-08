@@ -13,9 +13,21 @@ public class PlayerMovement : MonoBehaviour
     private  float facingDir   = 1;
     private bool facingFront = true;
 
+    #region Dash
+
+    [Header("Dash info")]
+    [SerializeField] private float dashSpeed;
+    [SerializeField] private float dashDuration;
+    [SerializeField] private float dashCooldown;
+    private                  float dashCooldownTimer;
+    private                  bool  isDashing;
+
+    #endregion
+
     // public Variablen sieht man im Inspector-Fenster von Unity und kann sie dort modifizieren
     // der zugewiesene Wert ist ein Default
-    public float speedMod = 1.0f;
+    public                  float speedMod = 1.0f;
+    private static readonly int   FacingFrontHash = Animator.StringToHash("facing front");
 
     void Start()
     {
@@ -27,13 +39,24 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        playerRigid.velocity = speedMod * ComputeIsometricVelocity();
-
-        animator.SetBool("facing front", facingFront);
-
+        DashController();
         FlipController();
+
+        var speed = isDashing ? dashSpeed : speedMod;
+        playerRigid.velocity = speed * ComputeIsometricVelocity();
+        animator.SetBool(FacingFrontHash, facingFront);
     }
 
+    private void DashController()
+    {
+        dashCooldownTimer -= Time.deltaTime;
+        isDashing         =  dashCooldownTimer >= dashCooldown - dashDuration;
+
+        if (!Input.GetKeyDown(KeyCode.LeftShift) || dashCooldownTimer > 0)
+            return;
+        
+        dashCooldownTimer = dashCooldown;
+    }
 
     private void FlipController()
     {

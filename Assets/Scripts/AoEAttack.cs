@@ -1,8 +1,11 @@
+using System;
 using Player;
 using UnityEngine;
+using Random = System.Random;
 
 public class AoEAttack : MonoBehaviour
 {
+    private static readonly Random _rnd = new();
     public float indicatorTime = 1.25f;
     public int damage = 1;
     public float damageCooldown = 0.5f;
@@ -44,5 +47,11 @@ public class AoEAttack : MonoBehaviour
                 _counter = 0; // reactivate damage cooldown
             }
         }
+    }
+
+    public static Vector3 GetAimPosition(Vector3 center, int randomAimFactor, int aoeSpawnCounter)
+    {
+        return center + new Vector3((float)(_rnd.NextDouble() - 0.5), (float)(_rnd.NextDouble() - 0.5), 0) *
+            randomAimFactor * (float)(_rnd.NextDouble() / Math.Sqrt(1 + aoeSpawnCounter % 3));
     }
 }

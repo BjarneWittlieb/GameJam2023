@@ -1,6 +1,4 @@
-using System;
 using Player;
-using PlayerScripts;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AI;
@@ -9,11 +7,11 @@ namespace Enemy
 {
     public abstract class Enemy : MonoBehaviour
     {
-        public  int   health = 1;
-        public  int   damage = 1;
+        public int health = 1;
+        public int damage = 1;
         public float stunTimer;
-        public  float stunDuration = 0.2f;
-        
+        public float stunDuration = 0.2f;
+
         [SerializeField] protected GameObject deathEffect;
 
         protected Animator[] animators;
@@ -26,6 +24,11 @@ namespace Enemy
         private readonly string playerName = "Player";
         protected float AttackDistance;
         protected float MovementSpeed;
+
+        protected virtual void Update()
+        {
+            stunTimer -= Time.deltaTime;
+        }
 
         protected void Start()
         {
@@ -51,14 +54,13 @@ namespace Enemy
             other.gameObject.GetComponent<Health>().ProcessHit(damage);
         }
 
-        protected virtual void Update()
-        {
-            stunTimer -= Time.deltaTime;
-        }
-
         protected virtual void Attack()
         {
             var player = new Rigidbody2D();
+        }
+
+        protected virtual void OnDeath()
+        {
         }
 
         private void DoDamage(int damage)
@@ -76,19 +78,19 @@ namespace Enemy
                 ProgressionTracking.Instance.KillEnemy();
 
                 AnimateDie();
-
+                OnDeath();
                 // Destroy with delay
                 Destroy(gameObject, .2f);
                 
                 if (deathEffect)
                     Instantiate(deathEffect, transform.position, quaternion.identity);
-                
+
                 return true;
             } else
             {
                 AnimateHit();
             }
-            
+
             stunTimer = stunDuration;
             return false;
         }

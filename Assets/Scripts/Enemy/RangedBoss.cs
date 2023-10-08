@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 namespace Enemy
@@ -12,6 +13,7 @@ namespace Enemy
         public int numberOfProjectiles = 5;
         public PostProcessVolume fxVolume;
         [SerializeField] private Projectile projectile;
+        [SerializeField] private GameObject aoeProjectile;
         [SerializeField] private Transform projectileSpawnPoint;
         private int _firedProjectiles;
 
@@ -31,11 +33,19 @@ namespace Enemy
         protected override void Update()
         {
             if (DateTime.Now <= _nextFire) return;
+            if (_firedProjectiles == 0)
+                SpawnAoE();
 
             FireProjectile();
             _firedProjectiles++;
             _firedProjectiles %= numberOfProjectiles;
             _nextFire = DateTime.Now.AddMilliseconds(_firedProjectiles != 0 ? 50 : fireRate);
+        }
+
+        protected override void OnDeath()
+        {
+            // win game
+            SceneManager.LoadScene("Win-Scene", LoadSceneMode.Single);
         }
 
 
@@ -52,6 +62,22 @@ namespace Enemy
             var newBullet = Instantiate(projectile, projectileSpawnPoint.position, Quaternion.Euler(0f, 0f, angle));
             var enemyProjectile = newBullet.GetComponent<Projectile>();
             enemyProjectile.damage = rangedDamage;
+        }
+
+        private void SpawnAoE()
+        {
+            var aimPosition = GetAimPosition();
+
+            Instantiate(aoeProjectile, aimPosition, Quaternion.Euler(0f, 0f, 0f));
+
+
+            // var enemyProjectile = newBullet.GetComponent<EnemyProjectile>();
+            // enemyProjectile.damage = rangedDamage;
+        }
+
+        private Vector3 GetAimPosition()
+        {
+            return AoEAttack.GetAimPosition(_player.transform.position, 10, 2);
         }
     }
 }
