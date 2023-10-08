@@ -17,6 +17,11 @@ namespace RoomGeneration
             AllObjects.Enemies.AoEAlone
         };
 
+        public static RoomObject[] Obstacles =
+        {
+            AllObjects.Obstacles.Obstacle
+        };
+
         private GameObject addedObject;
 
         protected Vector2[] positions;
@@ -35,6 +40,7 @@ namespace RoomGeneration
             this.positions = positions;
             DifficultyScore = difficulty;
             ObjectNumber = objectNumber;
+            Type = type;
         }
 
         public RoomObjectType Type { get; }
@@ -158,6 +164,18 @@ namespace RoomGeneration
 
             public static class Obstacles
             {
+                public static RoomObject Obstacle = new(
+                    "ObstaclePatterns/Obstacle",
+                    new Vector2[]
+                    {
+                        new(5.67f, 4.31f),
+                        new(5.93f, -1.54f),
+                        new(4.01f, 2.93f),
+                        new(.89f, 1.14f)
+                    },
+                    1,
+                    RoomObjectType.Obstacle
+                );
             }
         }
     }
