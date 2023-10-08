@@ -1,4 +1,5 @@
 using Player;
+using System.Threading;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AI;
@@ -80,7 +81,7 @@ namespace Enemy
                 AnimateDie();
                 OnDeath();
                 // Destroy with delay
-                Destroy(gameObject, .2f);
+                Destroy(gameObject, 1.5f);
                 
                 if (deathEffect)
                     Instantiate(deathEffect, transform.position, quaternion.identity);
@@ -95,16 +96,27 @@ namespace Enemy
             return false;
         }
 
+        private void setHittingAnimationFalse()
+        {
+            foreach (var animator in animators)
+            {
+                animator.SetBool("hitting", false);
+            }
+        }
+
         private void AnimateHit()
         {
+            if (animators == null) return;
             foreach(var animator in animators)
             {
                 animator.SetBool("hitting", true);
+                Invoke(nameof(setHittingAnimationFalse), .2f);
             }
         }
 
         private void AnimateDie()
         {
+            if (animators == null) return;
             foreach (var animator in animators)
             {
                 animator.SetBool("dying", true);
