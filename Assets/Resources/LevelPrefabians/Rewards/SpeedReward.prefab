@@ -4843,6 +4843,7 @@ GameObject:
   - component: {fileID: 641878715625145330}
   - component: {fileID: 4588242366747399737}
   - component: {fileID: 2998532557147714208}
+  - component: {fileID: 4173775985477747925}
   m_Layer: 0
   m_Name: SpeedReward
   m_TagString: Untagged
@@ -4953,3 +4954,15 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &4173775985477747925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4301872706090836650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7dadcad2a469ce41a3d6dd8462adc08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
