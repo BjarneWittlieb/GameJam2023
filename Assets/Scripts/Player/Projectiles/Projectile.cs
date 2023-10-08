@@ -1,8 +1,9 @@
 ﻿using System;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-namespace Player
+namespace Player.Projectiles
 {
     public class Projectile : MonoBehaviour
     {
@@ -11,15 +12,12 @@ namespace Player
         [SerializeField] protected AudioClip hitSound;
         [SerializeField] protected AudioClip shotSound;
 
-        [Header("Info")] [SerializeField] private float bulletSpeed;
-
+        [Header("Info")]
+        [FormerlySerializedAs("bulletSpeed")] 
+        [SerializeField] private float speed = 10;
         [SerializeField] public float damageMultiply;
         [SerializeField] private float lifeTime;
         private float isoFactor;
-
-        private                 Animator animator;
-        private                 bool     pop;
-        private static readonly int      Pop = Animator.StringToHash("pop");
 
         private int baseDamage;
 
@@ -29,30 +27,21 @@ namespace Player
             isoFactor = .5f + Math.Abs(norm.x) / 2f;
         }
 
-        private void Start()
+        protected virtual void Start()
         {
-            animator = GetComponentInChildren<Animator>();
-            
             if (shotSound)
                 AudioSource.PlayClipAtPoint(shotSound, transform.position);
 
             Invoke(nameof(DestroyInternal), lifeTime);
         }
 
-        private void FixedUpdate()
+        protected virtual void FixedUpdate()
         {
-            if (pop)
-                return;
-            
-            transform.Translate(Vector3.right * (bulletSpeed * isoFactor * Time.deltaTime), Space.Self);
+            transform.Translate(Vector3.right * (speed * isoFactor * Time.deltaTime), Space.Self);
         }
 
-        private void OnCollisionEnter2D(Collision2D other)
+        protected virtual void OnCollisionEnter2D(Collision2D other)
         {
-            Debug.Log("hit");
-            if (pop)
-                return;
-            
             DestroyInternal();
             
             if (other.gameObject.CompareTag("Enemy"))
@@ -67,13 +56,9 @@ namespace Player
                 AudioSource.PlayClipAtPoint(hitSound, transform.position);
         }
 
-        private void DestroyInternal()
+        protected virtual void DestroyInternal()
         {
-            pop = true;
-            animator.SetBool(Pop, pop);
-            var stateInfo     = animator.GetCurrentAnimatorStateInfo(0);
-            var remainingTime = stateInfo.length - stateInfo.normalizedTime * stateInfo.length;
-            Destroy(gameObject, remainingTime);
+            Destroy(gameObject);
         }
 
         public void SetBaseDamage(int baseDamage)
