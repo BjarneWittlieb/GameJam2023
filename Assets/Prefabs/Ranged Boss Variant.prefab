@@ -110,9 +110,10 @@ MonoBehaviour:
   recoilDivisor: 15
   fireRate: 2000
   rangedDamage: 1
-  numberOfProjectiles: 10
+  numberOfProjectiles: 20
   fxVolume: {fileID: 0}
   projectile: {fileID: 3845937625751165738, guid: ee37cec4bf6a345caae78523dcd46273, type: 3}
+  aoeProjectile: {fileID: 6679318488970040256, guid: 7bf029d0208ae447da6fa97669c6e3c9, type: 3}
   projectileSpawnPoint: {fileID: 7490144485458588845}
 --- !u!4 &7490144485458588845 stripped
 Transform:
