@@ -13,7 +13,7 @@ namespace Enemy
         public float stunTimer;
         public float stunDuration = 0.2f;
 
-        private bool isDead = false;
+        public bool isDead = false;
 
         [SerializeField] protected GameObject deathEffect;
 
@@ -35,7 +35,12 @@ namespace Enemy
 
         protected void Start()
         {
-            animators = GetComponentsInChildren<Animator>() ?? new Animator[] {};  
+            animators = GetComponentsInChildren<Animator>() ?? new Animator[] {};
+
+            if (animators?.Length < 2) return; 
+
+            animators[0].gameObject.SetActive(ProgressionTracking.Instance.CurrentRoom.IsGood);
+            animators[1].gameObject.SetActive(!ProgressionTracking.Instance.CurrentRoom.IsGood);
         }
 
         protected void OnCollisionEnter2D(Collision2D other)
@@ -75,6 +80,8 @@ namespace Enemy
 
         public bool TakeDamage(int amount)
         {
+            if (isDead) return false;
+
             health -= amount;
 
             if (health <= 0)
@@ -83,9 +90,10 @@ namespace Enemy
 
                 AnimateDie();
                 OnDeath();
+
                 isDead = true;
                 // Destroy with delay
-                Destroy(gameObject, 1.5f);
+                Destroy(gameObject, .7f);
                 
                 if (deathEffect)
                     Instantiate(deathEffect, transform.position, quaternion.identity);
@@ -124,6 +132,15 @@ namespace Enemy
             foreach (var animator in animators)
             {
                 animator.SetBool("dying", true);
+                Invoke(nameof(stopHit), .2f);
+            }
+        }
+
+        void stopHit()
+        {
+            foreach (var animator in animators)
+            {
+                animator.SetBool("dying", false);
             }
         }
     }
