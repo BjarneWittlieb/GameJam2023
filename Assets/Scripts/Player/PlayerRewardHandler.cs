@@ -17,7 +17,7 @@ namespace Assets.Scripts.Player
         public void Start()
         {
             playerMovement = GetComponent<PlayerMovement>();
-            playerAttack = GetComponent<RangedAttack>();
+            playerAttack = GetComponentInChildren<RangedAttack>();
             playerHealth = GetComponent<Health>();
         }
 

@@ -11,11 +11,13 @@ namespace RoomGeneration
     {
         public static RoomReward[] Rewards = new RoomReward[]
         {
-            new RoomReward { PrefabPath = "DamageReward" },
-            new RoomReward { PrefabPath = "HealthReward" }
+            new RoomReward { PrefabPath = "DamageReward", IsGood = false },
+            new RoomReward { PrefabPath = "HealthReward", IsGood = true }
         };
 
         public string PrefabPath { get; set; }
+
+        public bool IsGood { get; set; }
 
         public GameObject GetRewardItem()
         {
