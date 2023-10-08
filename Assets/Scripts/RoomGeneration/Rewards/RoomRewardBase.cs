@@ -23,6 +23,8 @@ namespace RoomGeneration.Rewards
 
             AddPlayerReward();
 
+            ProgressionTracking.Instance.ItemCollected();
+
             Destroy(this.gameObject);
         }
     }

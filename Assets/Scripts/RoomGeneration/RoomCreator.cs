@@ -16,6 +16,8 @@ public class RoomCreator : MonoBehaviour
     public float startingDifficulty = 1f;
     private float currentDifficulty;
 
+    public LevelDoor levelDoor1;
+    public LevelDoor levelDoor2;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +29,7 @@ public class RoomCreator : MonoBehaviour
 
         ProgressionTracking.Instance.Initialize(this);
 
-        DestroyAndBuildRoom();
+        DestroyAndBuildRoom(GetRoom());
     }
 
     public void SpawnRoomItem()
@@ -35,23 +37,34 @@ public class RoomCreator : MonoBehaviour
         Instantiate(room.RoomReward.GetRewardItem(), transform);
     }
 
-    public void DestroyAndBuildRoom()
+    private Room GetRoom()
+    {
+        return RoomFactory.CreateRoom(this.transform, new RoomSettings((int)currentDifficulty));
+    }
+
+    public void DestroyAndBuildRoom(Room newRoom)
     {
         if (room != null)
         {
             room.DestroyRoom();
         }
-        room = RoomFactory.CreateRoom(this.transform, new RoomSettings((int)currentDifficulty));
+        room = newRoom;
 
         room.PopulateObstacles();
         navMesh.BuildNavMesh();
         room.PopulateEnemies();
+
+        player.transform.position = playerStartPos;
+
+        levelDoor1.Reset();
+        levelDoor2.Reset();
 
         currentDifficulty++;
     }
 
     public void OpenNextRooms()
     {
-
+        levelDoor1.SetAccordingTo(GetRoom());
+        levelDoor2.SetAccordingTo(GetRoom());
     }
 }
