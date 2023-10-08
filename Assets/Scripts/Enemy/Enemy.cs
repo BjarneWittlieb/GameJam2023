@@ -16,6 +16,8 @@ namespace Enemy
         
         [SerializeField] protected GameObject deathEffect;
 
+        protected Animator[] animators;
+
         /// <summary>
         ///     <para>The lower the bigger the recoil of the player. 15 Seems nice</para>
         /// </summary>
@@ -24,6 +26,11 @@ namespace Enemy
         private readonly string playerName = "Player";
         protected float AttackDistance;
         protected float MovementSpeed;
+
+        protected void Start()
+        {
+            animators = GetComponentsInChildren<Animator>() ?? new Animator[] {};  
+        }
 
         protected void OnCollisionEnter2D(Collision2D other)
         {
@@ -58,6 +65,8 @@ namespace Enemy
         {
         }
 
+
+
         public bool TakeDamage(int amount)
         {
             health -= amount;
@@ -66,16 +75,38 @@ namespace Enemy
             {
                 ProgressionTracking.Instance.KillEnemy();
 
-                Destroy(gameObject);
+                AnimateDie();
+
+                // Destroy with delay
+                Destroy(gameObject, .2f);
                 
                 if (deathEffect)
                     Instantiate(deathEffect, transform.position, quaternion.identity);
                 
                 return true;
+            } else
+            {
+                AnimateHit();
             }
             
             stunTimer = stunDuration;
             return false;
+        }
+
+        private void AnimateHit()
+        {
+            foreach(var animator in animators)
+            {
+                animator.SetBool("hitting", true);
+            }
+        }
+
+        private void AnimateDie()
+        {
+            foreach (var animator in animators)
+            {
+                animator.SetBool("dying", true);
+            }
         }
     }
 }
