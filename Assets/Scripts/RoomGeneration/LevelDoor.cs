@@ -1,19 +1,25 @@
 using RoomGeneration;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelDoor : MonoBehaviour
 {
     public RoomCreator creator;
-    private SpriteRenderer spriteRenderer;
 
-    private bool isEnterable = false;
+    private bool isEnterable;
 
     private Room myRoom;
+    private SpriteRenderer spriteRenderer;
+
+    public void Reset()
+    {
+        isEnterable = false;
+        if (spriteRenderer == null)
+            return;
+        spriteRenderer.color = Color.black;
+    }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         Reset();
@@ -21,29 +27,18 @@ public class LevelDoor : MonoBehaviour
 
     protected void OnCollisionEnter2D(Collision2D other)
     {
-        if (!isEnterable || other.gameObject.name != "Player") {
-            return;
-        }
+        if (!isEnterable || other.gameObject.name != "Player") return;
 
         isEnterable = false;
         creator.DestroyAndBuildRoom(myRoom);
     }
 
-    public void Reset()
-    {
-        spriteRenderer.color = Color.black;
-        isEnterable = false;
-    }
-
     public void SetAccordingTo(Room room)
     {
         if (room.RoomReward.IsGood)
-        {
             spriteRenderer.color = Color.green;
-        } else
-        {
+        else
             spriteRenderer.color = Color.red;
-        }
 
         myRoom = room;
         isEnterable = true;
