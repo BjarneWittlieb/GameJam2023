@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace RoomGeneration.Rewards
 {
-    public class DamageReward : RoomRewardBase
+    public class BubbleDamageReward : RoomRewardBase
     {
         protected override void AddPlayerReward()
         {
-            rewardHandler.AddDamageReward();
+            rewardHandler.AddBubbleDamageReward();
         }
     }
 }

@@ -13,10 +13,17 @@ public class ProgressionTracking
 
     public RoomState RoomState { get; private set; }
 
+    public Room CurrentRoom { get; private set; }
+
     public void Initialize(RoomCreator roomCreator)
     {
         this.roomCreator = roomCreator;
         RoomState = RoomState.None;
+    }
+
+    public void SetCurrentRoom(Room room)
+    {
+        CurrentRoom= room;
     }
 
     public void ResetEnemyCountTo(int enemyCount)

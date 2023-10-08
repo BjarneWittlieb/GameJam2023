@@ -144,9 +144,7 @@ namespace RoomGeneration
                         new(4.01f, 2.93f),
                         new(.89f, 1.14f)
                     },
-                    15,
-                    RoomObjectType.Enemy,
-                    1
+                    15
                 );
 
                 public static RoomObject AoEAlone = new(
@@ -168,10 +166,14 @@ namespace RoomGeneration
                     "ObstaclePatterns/Obstacle",
                     new Vector2[]
                     {
-                        new(5.67f, 4.31f),
-                        new(5.93f, -1.54f),
-                        new(4.01f, 2.93f),
-                        new(.89f, 1.14f)
+                        new(-8.5f, 0.36f),
+                        new(3.39f, -0.9f),
+                        new(-1.63f, -4.8f),
+                        new(8.32f, 0.36f),
+                        new(0.14f, 4.9f),
+                        new(1.67f, -0.9f),
+                        new(4.08f, 5f),
+                        new(-6.51f, -0.9f)
                     },
                     1,
                     RoomObjectType.Obstacle

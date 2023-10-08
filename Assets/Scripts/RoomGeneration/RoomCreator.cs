@@ -53,7 +53,7 @@ public class RoomCreator : MonoBehaviour
         levelDoor1.Reset();
         levelDoor2.Reset();
 
-        currentDifficulty++;
+        currentDifficulty += .35f;
     }
 
     public void OpenNextRooms()
