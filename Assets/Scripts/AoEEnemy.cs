@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 using Random = System.Random;
 
@@ -35,6 +36,13 @@ public class AoEEnemy : Enemy.Enemy
     private void SpawnAoE()
     {
         Vector3 aimPosition = GetAimPosition();
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(new Vector2(aimPosition.x, aimPosition.y), 0.1f);
+
+        while (hitColliders.Length > 0 )
+        {
+            aimPosition = GetAimPosition();
+            hitColliders = Physics2D.OverlapCircleAll(new Vector2(aimPosition.x, aimPosition.y), 0.1f);
+        }
 
         var newBullet = Instantiate(projectile, aimPosition, Quaternion.Euler(0f, 0f, 0f));
 
