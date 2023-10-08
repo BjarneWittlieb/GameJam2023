@@ -8,12 +8,9 @@ namespace Enemy
     public abstract class Enemy : MonoBehaviour
     {
         public int health = 1;
-        public bool isDead;
         public int damage = 1;
         public float stunTimer;
         public float stunDuration = 0.2f;
-
-        private bool isDead = false;
 
         [SerializeField] protected GameObject deathEffect;
 
@@ -26,6 +23,8 @@ namespace Enemy
 
         protected Animator[] animators;
         protected float AttackDistance;
+
+        private bool isDead;
         protected float MovementSpeed;
 
         protected void Start()
