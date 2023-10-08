@@ -23,12 +23,12 @@ namespace Assets.Scripts.Player
 
         public void AddBubbleDamageReward()
         {
-            playerAttack.bubbleBaseDamage += 1;
+            playerAttack.bubbleBaseDamage += 2;
         }
 
         public void AddFireDamageReward()
         {
-            playerAttack.fireBaseDamage += 1;
+            playerAttack.fireBaseDamage += 2;
         }
 
         public void AddHealthReward() {
@@ -37,7 +37,7 @@ namespace Assets.Scripts.Player
         }
 
         public void AddSpeedReward() {
-            playerMovement.speedMod += .1f;
+            playerMovement.speedMod += .25f;
         }
 
         public void AddLifeRegReward(int strength) { 
