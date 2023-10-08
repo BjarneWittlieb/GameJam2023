@@ -26,7 +26,6 @@ namespace Enemy
         protected Animator[] animators;
         protected float AttackDistance;
 
-        private bool isDead;
         protected float MovementSpeed;
 
         protected void Start()
