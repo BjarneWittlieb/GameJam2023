@@ -289,10 +289,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Raum
       objectReference: {fileID: 0}
-    - target: {fileID: 8043186495338169730, guid: 2a0beb061ab2c7f45820f664507b0515, type: 3}
-      propertyPath: m_SortingOrder
-      value: -10
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
