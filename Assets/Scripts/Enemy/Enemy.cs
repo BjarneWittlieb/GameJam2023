@@ -1,5 +1,4 @@
 using Player;
-using System.Threading;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AI;
@@ -9,6 +8,7 @@ namespace Enemy
     public abstract class Enemy : MonoBehaviour
     {
         public int health = 1;
+        public bool isDead;
         public int damage = 1;
         public float stunTimer;
         public float stunDuration = 0.2f;
@@ -17,25 +17,25 @@ namespace Enemy
 
         [SerializeField] protected GameObject deathEffect;
 
-        protected Animator[] animators;
-
         /// <summary>
         ///     <para>The lower the bigger the recoil of the player. 15 Seems nice</para>
         /// </summary>
         public int recoilDivisor = 15;
 
         private readonly string playerName = "Player";
+
+        protected Animator[] animators;
         protected float AttackDistance;
         protected float MovementSpeed;
+
+        protected void Start()
+        {
+            animators = GetComponentsInChildren<Animator>() ?? new Animator[] { };
+        }
 
         protected virtual void Update()
         {
             stunTimer -= Time.deltaTime;
-        }
-
-        protected void Start()
-        {
-            animators = GetComponentsInChildren<Animator>() ?? new Animator[] {};  
         }
 
         protected void OnCollisionEnter2D(Collision2D other)
@@ -72,29 +72,28 @@ namespace Enemy
         }
 
 
-
         public bool TakeDamage(int amount)
         {
+            if (isDead) return true;
             health -= amount;
 
             if (health <= 0)
             {
                 ProgressionTracking.Instance.KillEnemy();
-
+                isDead = true;
                 AnimateDie();
                 OnDeath();
                 isDead = true;
                 // Destroy with delay
                 Destroy(gameObject, 1.5f);
-                
+
                 if (deathEffect)
                     Instantiate(deathEffect, transform.position, quaternion.identity);
 
                 return true;
-            } else
-            {
-                AnimateHit();
             }
+
+            AnimateHit();
 
             stunTimer = stunDuration;
             return false;
@@ -102,16 +101,13 @@ namespace Enemy
 
         private void setHittingAnimationFalse()
         {
-            foreach (var animator in animators)
-            {
-                animator.SetBool("hitting", false);
-            }
+            foreach (var animator in animators) animator.SetBool("hitting", false);
         }
 
         private void AnimateHit()
         {
             if (animators == null) return;
-            foreach(var animator in animators)
+            foreach (var animator in animators)
             {
                 animator.SetBool("hitting", true);
                 Invoke(nameof(setHittingAnimationFalse), .2f);
@@ -121,10 +117,7 @@ namespace Enemy
         private void AnimateDie()
         {
             if (animators == null) return;
-            foreach (var animator in animators)
-            {
-                animator.SetBool("dying", true);
-            }
+            foreach (var animator in animators) animator.SetBool("dying", true);
         }
     }
 }
