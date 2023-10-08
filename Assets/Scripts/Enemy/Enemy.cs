@@ -16,9 +16,6 @@ namespace Enemy
 
         [SerializeField] protected GameObject deathEffect;
 
-        /// <summary>
-        ///     <para>The lower the bigger the recoil of the player. 15 Seems nice</para>
-        /// </summary>
         public int recoilDivisor = 15;
 
         private readonly string playerName = "Player";
@@ -87,12 +84,13 @@ namespace Enemy
             if (health <= 0)
             {
                 ProgressionTracking.Instance.KillEnemy();
-                isDead = true;
+
                 AnimateDie();
                 OnDeath();
 
                 isDead = true;
                 // Destroy with delay
+                
                 Destroy(gameObject, .7f);
                 
                 if (deathEffect)
