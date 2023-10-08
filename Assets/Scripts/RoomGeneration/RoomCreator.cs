@@ -36,14 +36,14 @@ public class RoomCreator : MonoBehaviour
 
     private Room GetRoom()
     {
-        return RoomFactory.CreateRoom(transform, new RoomSettings((int)currentDifficulty));
+        var withBoss = currentDifficulty >= 3.5f;
+        return RoomFactory.CreateRoom(transform, new RoomSettings((int)currentDifficulty), withBoss);
     }
 
     public void DestroyAndBuildRoom(Room newRoom)
     {
         if (room != null) room.DestroyRoom();
-        var withBoss = currentDifficulty >= 3.5f;
-        room = RoomFactory.CreateRoom(transform, new RoomSettings((int)currentDifficulty), withBoss);
+        room = newRoom;
 
         room.PopulateObstacles();
         navMesh.BuildNavMesh();
